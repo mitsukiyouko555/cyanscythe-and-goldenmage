@@ -45,17 +45,20 @@ const getPosts = async () => {
                     author: metadata.author ? metadata.author : "N/A",
                     date_created: metadata.date_created ? metadata.date_created : "N/A",
                     date_modified: metadata.date_modified ? metadata.date_modified : "N/A",
+                    tag: metadata.tag ? metadata.tag : "No Tags",
                     content: content ? content: "No Content"
                 }
                 postlist.push(post)
+
                 if (i === files.length - 1){
                     let data = JSON.stringify(postlist)
-                    fs.writeFileSync("src/posts.json", data)
+                    fs.writeFileSync("src/categories/posts.json", data)
+
                 }
+                return
             })
         })
     })
-    return
 }
 
 getPosts()
