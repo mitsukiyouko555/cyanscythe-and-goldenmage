@@ -5,7 +5,7 @@ const dirPath = path.join(__dirname, "../src/content")
 
 let postlist = []
 
-const getPosts = async () => {
+const getPosts = () => {
     fs.readdir(dirPath, (err, files) => {
         if (err) {
             return console.log("Failed to list contents of directory: " + err)
@@ -13,7 +13,7 @@ const getPosts = async () => {
         files.forEach((file, i) =>{
             let obj = {}
             let post
-            fs.readFile(`${dirPath}/${file}`, "utf8", (err, contents) =>{
+            fs.readFile(`${dirPath}/${file}`, "utf8", (err, contents) => {
                 const getMetadataIndices = (acc, elem, i) => {
                     if (/^---/.test(elem)) {
                         acc.push(i)
@@ -33,7 +33,7 @@ const getPosts = async () => {
                     if (metadataIndices.length > 0){
                          lines = lines.slice(metadataIndices[1] + 1, lines.length)
                     }
-                    return(lines.join("\n"))
+                    return lines.join("\n")
                 }
                 const lines = contents.split("\n")
                 const metadataIndices = lines.reduce(getMetadataIndices, [])
@@ -46,16 +46,17 @@ const getPosts = async () => {
                     date_created: metadata.date_created ? metadata.date_created : "N/A",
                     date_modified: metadata.date_modified ? metadata.date_modified : "N/A",
                     tag: metadata.tag ? metadata.tag : "No Tags",
-                    content: content ? content: "No Content"
+                    content: content ? content: "No Content",
                 }
-                postlist.push(post)
+                setTimeout(() => {
+                    console.log(post)
+                    postlist.push(post)
+                    if (i === files.length - 1){
+                        let data = JSON.stringify(postlist)
+                        fs.writeFileSync("src/categories/posts.json", data)
+                    }                    
+                }, 5000);
 
-                if (i === files.length - 1){
-                    let data = JSON.stringify(postlist)
-                    fs.writeFileSync("src/categories/posts.json", data)
-
-                }
-                return
             })
         })
     })
