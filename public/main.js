@@ -53,7 +53,7 @@ const getPosts = () => {
                     postlist.push(post)
                     if (i === files.length - 1){
                         let data = JSON.stringify(postlist)
-                        fs.writeFileSync("src/categories/posts.json", data)
+                        fs.writeFileSync("src/posts/posts.json", data)
                     }                    
                 }, 5000);
 

@@ -10,3 +10,23 @@
 body{
     font-family: "Avenir";
 }
+
+.post-chunk{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.post-card{
+    border-style: solid;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.post-img{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 15px;
+}

@@ -1,32 +1,28 @@
-import postlist from "../categories/posts.json"
+import postlist from "../posts/posts.json"
 import Markdown from "react-markdown"
-export default function Postlist(){
-
-    //title
-    //date_created
-    //date_modified
-    //author
-    //tag
-    //content
-    
+export default function Postlist(props){
     return(
         <>
-            <h1>All Posts</h1>
+            <h1>{props.blogtype} Posts</h1>
+            <img className="post-img" src={props.image}/>
+            <div className="post-chunk">
             {postlist.length && 
                 postlist.map((post, i) => {
-                    return(
-                        <div className="post-card">
-                            <hr/>
-                            <h2>{post.title}</h2>
-                            <small>Date Created: {post.date_created} by {post.author}</small>
-                            <br/>
-                            <small>Date Modified: {post.date_modified}</small>
-                            <br/>
-                            <Markdown>{post.content}</Markdown>
-                        </div>
-                    )
+                    if (post.tag == props.tag){
+                        return(
+                            <div className="post-card">
+                                {/* <hr/> */}
+                                <span><h2>{post.title}</h2></span>
+                                <span><small>Date Created: {post.date_created} by {post.author}</small></span>
+                                <br/>
+                                <span><small>Date Modified: {post.date_modified}</small></span>
+                                <br/>
+                                <span><Markdown>{post.content}</Markdown></span>
+                            </div>
+                    )}
                 })
             }
+            </div>
         </>
     )
 }

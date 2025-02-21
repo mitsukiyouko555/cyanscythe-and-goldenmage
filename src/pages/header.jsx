@@ -10,6 +10,7 @@ export default function Header(){
                 <li>Cy & Den</li>
                 <li>Ethical Hacking</li>
                 <li>Scripts</li>
+                <li>Misc</li>
             </ul>
         </div>
     )
