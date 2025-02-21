@@ -4,7 +4,6 @@ export default function Header(){
             <h1>Cyanscythe and Goldenmage</h1>
             <ul>
                 <li>Home</li>
-                <li>About</li>
                 <li>Technical Writing</li>
                 <li>Projects</li>
                 <li>Cy & Den</li>

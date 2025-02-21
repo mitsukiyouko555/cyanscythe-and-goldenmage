@@ -11,7 +11,6 @@ export default function Postlist(props){
                     if (post.tag == props.tag){
                         return(
                             <div className="post-card">
-                                {/* <hr/> */}
                                 <span><h2>{post.title}</h2></span>
                                 <span><small>Date Created: {post.date_created} by {post.author}</small></span>
                                 <br/>

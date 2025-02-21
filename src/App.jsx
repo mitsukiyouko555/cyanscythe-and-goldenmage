@@ -20,6 +20,7 @@ export default function App() {
         <HashRouter>
             <Routes>
               <Route path="/" element={<Home/>}/>
+              <Route path="/home" element={<Home/>}/>
               <Route path="/techwriting" element={<Postlist blogtype="Technical Writing" image="/src/assets/img/technicalwriting.jpg" tag="techwriting"/>}/>
               <Route path="/projects" element={<Postlist blogtype="Projects" image="/src/assets/img/projects.jpg" tag="projects"/>}/>
               <Route path="/cyandden" element={<Postlist blogtype="Cyanscythe and Goldenmage" image="/src/assets/img/cyandden.jpg" tag="cyandden"/>}/>

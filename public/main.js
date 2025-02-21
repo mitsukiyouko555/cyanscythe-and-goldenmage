@@ -1,65 +1,66 @@
-const path = require("path")
-const fs = require("fs")
+//Outputted per Gemini Experimental thinking (basically Gemini with Deepseek) with Comments as the original ver from the tutorial (https://www.youtube.com/watch?v=gT1v33oA1gI&list=PLASldBPN_pkBfRXOkBOaeCJYzCnISw5-Z&index=1&pp=iAQB) made it so that anytime i ran `npm run server`, it would sometimes push SOME but not all of the posts to the postlist and when re-running that command, it would sometimes get all the posts. (when ran over the course of 10 times, the results varied. Here, with this output and the async promise, it seems to be fixed.)
 
-const dirPath = path.join(__dirname, "../src/content")
+const path = require("path");
+const fs = require("fs");
 
-let postlist = []
+const dirPath = path.join(__dirname, "../src/content");
 
-const getPosts = () => {
-    fs.readdir(dirPath, (err, files) => {
-        if (err) {
-            return console.log("Failed to list contents of directory: " + err)
-        }
-        files.forEach((file, i) =>{
-            let obj = {}
-            let post
-            fs.readFile(`${dirPath}/${file}`, "utf8", (err, contents) => {
-                const getMetadataIndices = (acc, elem, i) => {
-                    if (/^---/.test(elem)) {
-                        acc.push(i)
-                    }
-                    return acc
+let postlist = [];
+
+const getPosts = async () => { // Make getPosts an async function
+    try {
+        const files = await fs.promises.readdir(dirPath); // Use fs.promises.readdir for Promise-based readdir
+        const postPromises = files.map(async (file, i) => { // Use map to create an array of Promises
+            let obj = {};
+            let post;
+            const contents = await fs.promises.readFile(`${dirPath}/${file}`, "utf8"); // Use fs.promises.readFile for Promise-based readFile
+
+            const getMetadataIndices = (acc, elem, i) => {
+                if (/^---/.test(elem)) {
+                    acc.push(i);
                 }
-                const parseMetadata = ({lines, metadataIndices}) =>{
-                    if (metadataIndices.length > 0){
-                        let metadata = lines.slice(metadataIndices[0]+1, metadataIndices[1])
-                        metadata.forEach(line => {
-                            obj[line.split(": ")[0]] = line.split(": ")[1]
-                        })
-                        return obj
-                    }
+                return acc;
+            };
+            const parseMetadata = ({ lines, metadataIndices }) => {
+                if (metadataIndices.length > 0) {
+                    let metadata = lines.slice(metadataIndices[0] + 1, metadataIndices[1]);
+                    metadata.forEach(line => {
+                        obj[line.split(": ")[0]] = line.split(": ")[1];
+                    });
+                    return obj;
                 }
-                const parseContent = ({lines, metadataIndices}) => {
-                    if (metadataIndices.length > 0){
-                         lines = lines.slice(metadataIndices[1] + 1, lines.length)
-                    }
-                    return lines.join("\n")
+            };
+            const parseContent = ({ lines, metadataIndices }) => {
+                if (metadataIndices.length > 0) {
+                    lines = lines.slice(metadataIndices[1] + 1, lines.length);
                 }
-                const lines = contents.split("\n")
-                const metadataIndices = lines.reduce(getMetadataIndices, [])
-                const metadata = parseMetadata({lines, metadataIndices})
-                const content = parseContent({lines, metadataIndices})
-                post = {
-                    id: i + 1,
-                    title: metadata.title ?  metadata.title : "Untitled Post",
-                    author: metadata.author ? metadata.author : "N/A",
-                    date_created: metadata.date_created ? metadata.date_created : "N/A",
-                    date_modified: metadata.date_modified ? metadata.date_modified : "N/A",
-                    tag: metadata.tag ? metadata.tag : "No Tags",
-                    content: content ? content: "No Content",
-                }
-                setTimeout(() => {
-                    console.log(post)
-                    postlist.push(post)
-                    if (i === files.length - 1){
-                        let data = JSON.stringify(postlist)
-                        fs.writeFileSync("src/posts/posts.json", data)
-                    }                    
-                }, 5000);
+                return lines.join("\n");
+            };
+            const lines = contents.split("\n");
+            const metadataIndices = lines.reduce(getMetadataIndices, []);
+            const metadata = parseMetadata({ lines, metadataIndices });
+            const content = parseContent({ lines, metadataIndices });
+            post = {
+                id: i + 1,
+                title: metadata.title ? metadata.title : "Untitled Post",
+                author: metadata.author ? metadata.author : "N/A",
+                date_created: metadata.date_created ? metadata.date_created : "N/A",
+                date_modified: metadata.date_modified ? metadata.date_modified : "N/A",
+                tag: metadata.tag ? metadata.tag : "No Tags",
+                content: content ? content : "No Content",
+            };
+            console.log(post); // Log each post as it's processed
+            return post; // Return the post from the Promise
+        });
 
-            })
-        })
-    })
-}
+        postlist = await Promise.all(postPromises); // Wait for all file reads and processing to complete
+        const data = JSON.stringify(postlist);
+        await fs.promises.writeFile("src/posts/posts.json", data); // Use fs.promises.writeFile for Promise-based writeFile
+        console.log("posts.json written successfully");
 
-getPosts()
+    } catch (err) {
+        console.error("Error in getPosts:", err);
+    }
+};
+
+getPosts();
