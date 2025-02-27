@@ -2,8 +2,9 @@
 title: This is a SECOND TEST post...
 author: Mitsuki Youko
 date_created: Feb 6, 2025
-date_modified:
 tag: projects
+blurb: blurb for post this second post.
+
 ---
 
 # Title
@@ -15,3 +16,5 @@ tag: projects
 2ndImage goes here:
 
 <test what its like to put an image here..>
+
+![testimage](/src/assets/img/ollie.png)

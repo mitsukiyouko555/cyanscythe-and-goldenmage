@@ -11,9 +11,23 @@ body{
     font-family: "Avenir";
 }
 
+.headerlist{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.bloglink{
+    list-style-type: none;
+    
+}
+
 .post-chunk{
     display: flex;
-    justify-content: left;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 
@@ -22,6 +36,8 @@ body{
     border-radius: 15px;
     padding: 10px;
     margin: 10px;
+    width: 15em;
+    height: 15em;
 }
 
 .post-img{

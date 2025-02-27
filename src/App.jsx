@@ -3,6 +3,7 @@ import Home from "./pages/home";
 import Header from "./pages/header";
 import Footer from "./pages/footer";
 import Postlist from "./pages/postlist";
+import Actualpages from "./pages/actualpages";
 
 // Tag Categories:
 //     Technical Writing
@@ -27,6 +28,8 @@ export default function App() {
               <Route path="/ethicalhacking" element={<Postlist blogtype="Ethical Hacking" image="/src/assets/img/ethicalhacking.jpg" tag="ethicalhacking"/>}/>
               <Route path="/scripts" element={<Postlist blogtype="Scripts" image="/src/assets/img/scripts.jpg" tag="projects"/>}/>
               <Route path="/misc" element={<Postlist blogtype="Misc" image="/src/assets/img/misc.jpg" tag="misc"/>}/>
+              <Route path="/:postId" element={<Actualpages/>}/>
+              <Route path="*" element={<h1>404 Page Not Found!</h1>} />
             </Routes>
         </HashRouter>
         {/* <Postlist blogtype="Technical Writing" image="/src/assets/img/technicalwriting.jpg" tag="techwriting"/>

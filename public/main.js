@@ -45,8 +45,8 @@ const getPosts = async () => { // Make getPosts an async function
                 title: metadata.title ? metadata.title : "Untitled Post",
                 author: metadata.author ? metadata.author : "N/A",
                 date_created: metadata.date_created ? metadata.date_created : "N/A",
-                date_modified: metadata.date_modified ? metadata.date_modified : "N/A",
                 tag: metadata.tag ? metadata.tag : "No Tags",
+                blurb: metadata.blurb ? metadata.blurb : "No Blurb Available",
                 content: content ? content : "No Content",
             };
             console.log(post); // Log each post as it's processed

@@ -1,6 +1,9 @@
 import postlist from "../posts/posts.json"
+import { Link } from "react-router-dom"
 import Markdown from "react-markdown"
+import { HashRouter, Router, Route, useNavigate } from "react-router-dom"
 export default function Postlist(props){
+
     return(
         <>
             <h1>{props.blogtype} Posts</h1>
@@ -11,16 +14,24 @@ export default function Postlist(props){
                     if (post.tag == props.tag){
                         return(
                             <div className="post-card">
-                                <span><h2>{post.title}</h2></span>
-                                <span><small>Date Created: {post.date_created} by {post.author}</small></span>
+                                <li key={post.id} className="bloglink">
+                                    <Link to={`/${post.id}`}>
+                                        <h2>{post.title}</h2>
+                                    </Link>
+                                </li>
+                                <small>Date Created: {post.date_created}</small>
                                 <br/>
-                                <span><small>Date Modified: {post.date_modified}</small></span>
+                                <small>Author: {post.author}</small>
                                 <br/>
-                                <span><Markdown>{post.content}</Markdown></span>
+                                <br/>
+                                <strong><small>Description:</small></strong>
+                                <br/>
+                                <small>{post.blurb}</small>
+                                {/* <span><Markdown>{post.content}</Markdown></span> */}
                             </div>
-                    )}
-                })
-            }
+                        )}
+                    })
+                }
             </div>
         </>
     )
