@@ -1,34 +1,41 @@
 import { useParams } from "react-router-dom"
 import postlist from "../posts/posts.json"
+import Markdown from "react-markdown"
+
 export default function Actualpages(){
-
-//When someone click on the link to a blog, that link shoudl bring them to the blog's actual page..
-
-//This page would be the blog's actual page. this should show the following using PROPS:
-//Page Title
-//Page Creation date
-//Page Author
-//Page Content
 
 const {postId} = useParams()
 
 const post = postlist.find(post => String(post.id) === postId)
 
 
-    if (!post){
+    if (!post || post.id == 0){
         return(
-            <div>Blog Post Not Found!</div>
+            <div>
+                <br/>
+                <h1>Blog Post Not Found!</h1>
+            </div>
         )
     }
 
     return(
         <>
-            <h1>{post.title}</h1>
-            <p>Date Created: {post.date_created}</p>
-            <p>Author: {post.author}</p>
-            <br/>
+            <div className="blogpost-itself">
+                <div className="post-wrapper">
+                    <div className="title-content">
+                        <h1>{post.title}</h1>
+                        <p><strong>Date Created:</strong> {post.date_created}</p>
+                        <p><strong>Author:</strong> {post.author}</p>
+                        <p><strong>Description:</strong> {post.blurb}</p>
 
-            {/* <span><Markdown>{post.content}</Markdown></span> */}
+                    </div>
+                </div>
+                <hr width="75%"/>
+                <div className="content-wrapper">
+                    
+                    <Markdown className="content">{post.content}</Markdown>
+                </div>
+            </div>
         </>
     )
 }

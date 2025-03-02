@@ -4,30 +4,80 @@
 
 @font-face{
     font-family: "Avenir";
-    src:url(assets/Avenir.ttc)
+    src:url(assets/fonts/Avenir.ttc)
+}
+
+@font-face{
+    font-family: "Yeysk";
+    src:url(assets/fonts/YeyskRegular-JzaM.otf)
+}
+
+.blogtitle{
+    font-family: "Yeysk";
+    /* background: -webkit-linear-gradient(rgb(0, 0, 0), rgb(173, 22, 203), rgb(0, 0, 0)); */
+    background: -webkit-linear-gradient(rgb(153, 235, 199), rgb(166, 241, 160), rgb(202, 246, 206));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;    
+}
+html{
+    min-height: 100vh;
+}
+
+.post-size{
+    min-height: 100vh;
+
 }
 
 body{
     font-family: "Avenir";
+    color: rgb(229, 255, 192);
+    /* background-image: linear-gradient(rgb(184, 255, 181),rgb(128, 241, 185)); */
+    background-image: linear-gradient(rgb(19, 17, 17), rgb(48, 65, 62) ,rgb(85, 155, 122), rgb(105, 156, 113));
 }
+
+footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+hr{
+    border-style: solid;
+    color: rgb(164, 224, 163);
+}
+
 
 .headerlist{
     list-style-type: none;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    flex-basis: auto;
     flex-wrap: wrap;
     padding-left: 5%;
     padding-right: 5%;
 }
 
+ul{
+   display: flex;
+}
+
+ul a{
+    text-decoration: none;
+    color: rgb(191, 246, 163);
+}
+
+ul a:hover{
+    text-decoration: none;
+    color: rgb(179, 0, 255);
+}
+
 .bloglink{
     list-style-type: none;
-    
 }
 
 .post-chunk{
     display: flex;
-    justify-content: flex-start;
     flex-wrap: wrap;
 }
 
@@ -38,6 +88,12 @@ body{
     margin: 10px;
     width: 15em;
     height: 15em;
+    color: rgb(17, 58, 67);
+    background-color: rgb(187, 255, 198);
+}
+
+.blogpost-itself{
+    min-height: 50em;
 }
 
 .post-img{
@@ -45,4 +101,31 @@ body{
     justify-content: center;
     width: 100%;
     margin-bottom: 15px;
+    border: none;
+}
+
+.post-wrapper{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.title-content{
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.content-wrapper{
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.content{
+    word-wrap: break-word;
+}
+
+img{
+    width: 75%;
+    border: solid;
+    border-width: thin;
 }

@@ -41,7 +41,7 @@ const getPosts = async () => { // Make getPosts an async function
             const metadata = parseMetadata({ lines, metadataIndices });
             const content = parseContent({ lines, metadataIndices });
             post = {
-                id: i + 1,
+                id: i,
                 title: metadata.title ? metadata.title : "Untitled Post",
                 author: metadata.author ? metadata.author : "N/A",
                 date_created: metadata.date_created ? metadata.date_created : "N/A",

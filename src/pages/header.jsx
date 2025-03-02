@@ -1,19 +1,21 @@
-import { HashRouter, Routes, Route, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export default function Header(){
     return(
-        
-        <div className="header">
-            <h1>Cyanscythe and Goldenmage</h1>
-            <ul className="headerlist">
-                <li>Home</li>
-                <li>Technical Writing</li>
-                <li>Projects</li>
-                <li>Cy & Den</li>
-                <li>Ethical Hacking</li>
-                <li>Scripts</li>
-                <li>Misc</li>
-            </ul>
-        </div>
+        <>
+            <div className="header">
+                <h1 className="blogtitle">Cyanscythe and Goldenmage</h1>
+                <ul className="headerlist">
+                    <li><Link to={`/home`}>Home</Link></li>
+                    <li><Link to={`/techwriting`}>Technical Writing</Link></li>
+                    <li><Link to={`/projects`}>Projects</Link></li>
+                    <li><Link to={`/cyandden`}>Cy & Den</Link></li>
+                    <li><Link to={`/ethicalhacking`}>Ethical Hacking</Link></li>
+                    <li><Link to={`/scripts`}>Scripts</Link></li>
+                    <li><Link to={`/misc`}>Misc</Link></li>
+                </ul>
+                <hr/>
+            </div>
+        </>
     )
 }

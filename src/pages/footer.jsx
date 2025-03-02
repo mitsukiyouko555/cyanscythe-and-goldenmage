@@ -1,9 +1,12 @@
 export default function Footer(){
     return(
         <>
-            <br/>
             <hr/>
-            <p>&copy; Mitsuki Youko {new Date().getFullYear()}</p>
+            <footer>
+                <div>
+                <p>&copy; Mitsuki Youko {new Date().getFullYear()}</p>
+                </div>
+            </footer>
         </>
     )
 }

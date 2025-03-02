@@ -1,15 +1,15 @@
 ---
-title: This is a SECOND TEST post...
+title: Misc
 author: Mitsuki Youko
 date_created: Feb 6, 2025
-tag: projects
+tag: misc
 blurb: blurb for post this second post.
 
 ---
 
-# Title
+# Heading 1
 
-### Heading 1
+### Heading 3
 
 2ndParagraph goes here...
 

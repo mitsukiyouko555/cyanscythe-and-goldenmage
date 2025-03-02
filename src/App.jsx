@@ -17,8 +17,9 @@ export default function App() {
 
   return (
     <>
-        <Header/>
+        <div className="fullwrapper">
         <HashRouter>
+        <Header/>
             <Routes>
               <Route path="/" element={<Home/>}/>
               <Route path="/home" element={<Home/>}/>
@@ -26,19 +27,14 @@ export default function App() {
               <Route path="/projects" element={<Postlist blogtype="Projects" image="/src/assets/img/projects.jpg" tag="projects"/>}/>
               <Route path="/cyandden" element={<Postlist blogtype="Cyanscythe and Goldenmage" image="/src/assets/img/cyandden.jpg" tag="cyandden"/>}/>
               <Route path="/ethicalhacking" element={<Postlist blogtype="Ethical Hacking" image="/src/assets/img/ethicalhacking.jpg" tag="ethicalhacking"/>}/>
-              <Route path="/scripts" element={<Postlist blogtype="Scripts" image="/src/assets/img/scripts.jpg" tag="projects"/>}/>
+              <Route path="/scripts" element={<Postlist blogtype="Scripts" image="/src/assets/img/scripts.jpg" tag="scripts"/>}/>
               <Route path="/misc" element={<Postlist blogtype="Misc" image="/src/assets/img/misc.jpg" tag="misc"/>}/>
               <Route path="/:postId" element={<Actualpages/>}/>
               <Route path="*" element={<h1>404 Page Not Found!</h1>} />
             </Routes>
+          <Footer/>
         </HashRouter>
-        {/* <Postlist blogtype="Technical Writing" image="/src/assets/img/technicalwriting.jpg" tag="techwriting"/>
-        <Postlist blogtype="Projects" image="/src/assets/img/projects.jpg" tag="projects"/>
-        <Postlist blogtype="Cyanscythe and Goldenmage" image="/src/assets/img/cyandden.jpg" tag="cyandden"/>
-        <Postlist blogtype="Ethical Hacking" image="/src/assets/img/ethicalhacking.jpg" tag="ethicalhacking"/>
-        <Postlist blogtype="Scripts" image="/src/assets/img/scripts.jpg" tag="projects"/>
-        <Postlist blogtype="Misc" image="/src/assets/img/misc.jpg" tag="misc"/> */}
-        <Footer/>
+        </div>
     </>
   )
 }
