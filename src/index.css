@@ -32,7 +32,7 @@ body{
     font-family: "Avenir";
     color: rgb(229, 255, 192);
     /* background-image: linear-gradient(rgb(184, 255, 181),rgb(128, 241, 185)); */
-    background-image: linear-gradient(rgb(19, 17, 17), rgb(48, 65, 62) ,rgb(85, 155, 122), rgb(105, 156, 113));
+    background-image: linear-gradient(rgb(28, 31, 28), rgb(59, 76, 73) ,rgb(100, 148, 126));
 }
 
 footer{
@@ -64,12 +64,12 @@ ul{
 
 ul a{
     text-decoration: none;
-    color: rgb(191, 246, 163);
+    color: rgb(192, 246, 163);
 }
 
 ul a:hover{
     text-decoration: none;
-    color: rgb(179, 0, 255);
+    color: rgb(59, 255, 154);
 }
 
 .bloglink{
@@ -83,13 +83,20 @@ ul a:hover{
 
 .post-card{
     border-style: solid;
+    border-width: 3px;
     border-radius: 15px;
+    border-color: rgb(0, 0, 0);
     padding: 10px;
-    margin: 10px;
+    margin: 8px;
     width: 15em;
     height: 15em;
     color: rgb(17, 58, 67);
     background-color: rgb(187, 255, 198);
+    opacity: 100%;
+}
+
+.post-card:hover{
+    opacity: 90%;
 }
 
 .blogpost-itself{

@@ -27,7 +27,6 @@ const post = postlist.find(post => String(post.id) === postId)
                         <p><strong>Date Created:</strong> {post.date_created}</p>
                         <p><strong>Author:</strong> {post.author}</p>
                         <p><strong>Description:</strong> {post.blurb}</p>
-
                     </div>
                 </div>
                 <hr width="75%"/>

@@ -3,15 +3,22 @@ import { Link } from "react-router-dom"
 
 export default function Postlist(props){
 
+    const sortedPosts = [...postlist];
+    sortedPosts.sort((a,b) => {
+        const dateA = new Date(a.date_created);
+        const dateB = new Date(b.date_created);
+        return dateB - dateA;
+    });
+
     return(
         <>
             <img className="post-img" src={props.image}/>
             <h1>{props.blogtype} Posts</h1>
             <div className="post-chunk">
-            {postlist.length && 
-                postlist.map((post, i) => {
+            {sortedPosts.length && 
+                sortedPosts.map((post, i) => {
                     const tags = post.tag.split(',').map(tag => tag.trim())
-                    if (tags.includes(props.tag)){
+                    if (tags.includes(props.tag) || (props.flag == "all")){
                         return(
                             <li key={post.id} className="bloglink">
                             <Link to={`/${post.id}`} style={{ textDecoration: 'none' }}>

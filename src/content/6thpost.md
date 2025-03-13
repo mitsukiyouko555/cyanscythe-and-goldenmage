@@ -1,7 +1,7 @@
 ---
 title: Scripts
 author: Mitsuki Youko
-date_created: Feb 21, 2025
+date_created: 2025-02-21
 tag: scripts
 blurb: blurb should be 30 words long MAX
 ---

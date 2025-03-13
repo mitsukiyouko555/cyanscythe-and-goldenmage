@@ -1,7 +1,7 @@
 ---
 title: Misc
 author: Mitsuki Youko
-date_created: Feb 6, 2025
+date_created: 2025-02-06
 tag: misc
 blurb: blurb for post this second post.
 

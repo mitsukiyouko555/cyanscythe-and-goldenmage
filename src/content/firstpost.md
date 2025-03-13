@@ -1,7 +1,7 @@
 ---
 title: Technical Writing
 author: Mitsuki Youko
-date_created: Feb 6, 2025
+date_created: 2025-02-06
 tag: techwriting
 blurb: blurb for the first post
 ---
