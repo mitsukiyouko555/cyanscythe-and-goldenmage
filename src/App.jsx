@@ -5,14 +5,6 @@ import Footer from "./pages/footer";
 import Postlist from "./pages/postlist";
 import Actualpages from "./pages/actualpages";
 
-// Tag Categories:
-//     Technical Writing
-//     Projects
-//     Cy & Den
-//     Ethical Hacking
-//     Scripts
-//     Misc
-
 export default function App() {
 
   return (
