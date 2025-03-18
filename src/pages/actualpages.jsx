@@ -9,7 +9,7 @@ const {postId} = useParams()
 const post = postlist.find(post => String(post.id) === postId)
 
 
-    if (!post || post.id == 0){
+    if (!post){
         return(
             <div>
                 <br/>

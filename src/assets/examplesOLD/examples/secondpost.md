@@ -17,4 +17,4 @@ blurb: blurb for post this second post.
 
 <test what its like to put an image here..>
 
-![testimage](/src/assets/img/ollie.png)
+![testimage](/src/assets/img/example/ollie.png)
