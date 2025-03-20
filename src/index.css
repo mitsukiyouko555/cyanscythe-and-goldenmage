@@ -72,6 +72,56 @@ ul a:hover{
     color: rgb(59, 255, 154);
 }
 
+.about-section{
+    display: block;
+    align-items: left;
+}
+
+.about-section p {
+    display: block;
+    padding-left: 0px;
+    align-items: left;
+}
+.intro{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.intro-text{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border:  solid;
+    border-radius: 3em;
+    width: 15em;
+    margin: 1.1em;
+    align-items: center;
+    background-image: linear-gradient(rgb(28, 31, 28), rgb(59, 76, 73) ,rgb(100, 148, 126));
+}
+
+.intro-text h3, p {
+    display: flex;
+    justify-content: center;
+    color: rgb(219, 255, 209);
+    padding-right: 0.7em;
+    padding-left: 0.7em;
+
+}
+
+.intro-text p{
+    height: 8em;
+    padding-bottom: 2em;
+}
+
+.intro-text-logo{
+    display: flex;
+    justify-content: center;
+    border: none;
+    padding-bottom: 2em;
+}
+
 .smlogo-wrapper{
     display: flex;
 
@@ -80,6 +130,7 @@ ul a:hover{
 .smlogo{
     width: 5.5em;
     height: 5.5em;
+    margin-right: 8px;
     border: none;
 }
 
@@ -107,7 +158,9 @@ ul a:hover{
     width: 15em;
     height: 15em;
     color: rgb(17, 58, 67);
-    background-color: rgb(187, 255, 198);
+    /* background-color: rgb(187, 255, 198); */
+    /* background-image: linear-gradient(rgb(164, 253, 169), rgb(28, 207, 123) ,rgb(76, 233, 107)); */
+    background-image: linear-gradient(rgb(180, 248, 183), rgb(136, 242, 168),rgb(81, 238, 196));
 }
 
 .post-card:hover{
