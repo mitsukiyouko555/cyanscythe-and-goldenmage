@@ -1,4 +1,15 @@
 import Postlist from "./postlist"
+import { Link } from "react-router-dom"
+
+
+{/* <li><Link to={`/home`}>Home</Link></li>
+<li><Link to={`/techwriting`}>How To's</Link></li>
+<li><Link to={`/projects`}>Projects</Link></li>
+<li><Link to={`/cyandden`}>Cy & Den</Link></li>
+<li><Link to={`/ethicalhacking`}>Ethical Hacking</Link></li>
+<li><Link to={`/scripts`}>Scripts</Link></li>
+<li><Link to={`/misc`}>Misc</Link></li> */}
+
 
 export default function Home(){
 
@@ -12,41 +23,55 @@ export default function Home(){
             <h2>The Cyanscythe and Goldenmage Blog consists of 6 categories:</h2>
 
             <div className="intro">
-                <section className="intro-text">
-                <h3>How To's</h3>
-                <p>These are technical writing blogs where I write tutorials about how to do certain technical things. They are basically "How-to" articles.</p>
-                <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
-                </section>
 
-                <section className="intro-text">
-                <h3>Projects</h3>
-                <p>This is similar to the 'How To' category in terms of Technical Writing but each post revolves around how to do certain projects from beginning to end rather than just tips here and there.</p>
-                <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
-                </section>
+            <Link to={`/techwriting`} className="intro-link">
+                    <section className="intro-text">
+                        <h3>How To's</h3>
+                        <p>These are technical writing blogs where I write tutorials about how to do certain technical things. They are basically "How-to" articles.</p>
+                        <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
+                    </section>
+            </Link>
 
-                <section className="intro-text">
-                <h3>Cy & Den</h3>
-                <p>This category is sometimes depicted in short comics, or at times, is written like technical writing but with interjections from Cy and Den throughout and shown from both an Red and Blue Team perspective. </p>
-                <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
-                </section>
+            <Link to={`/projects`} className="intro-link">
+                    <section className="intro-text">
+                        <h3>Projects</h3>
+                        <p>This is similar to the 'How To' category in terms of Technical Writing but each post revolves around how to do certain projects from beginning to end rather than just tips here and there.</p>
+                        <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
+                    </section>
+            </Link>
 
-                <section className="intro-text">
-                <h3>Ethical Hacking</h3>
-                <p>This category is technical writing as well, but specifically around how to hack (ethically of course). There will also be some walkthroughs on ethical hacking challenges.</p>
-                <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>                
-                </section>
+            <Link to={`/cyandden`} className="intro-link">
+                    <section className="intro-text">
+                        <h3>Cy & Den</h3>
+                        <p>This category is sometimes depicted in short comics, or at times, is written like technical writing but with interjections from Cy and Den throughout and shown from both an Red and Blue Team perspective. </p>
+                        <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
+                    </section>
+                </Link>
 
-                <section className="intro-text">
-                <h3>Scripts</h3>
-                <p>This category breaks down the scripts that I wrote line by line along with in depth explanations of how and why it works.</p>
-                <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
-                </section>
+                <Link to={`/ethicalhacking`} className="intro-link">
+                    <section className="intro-text">
+                        <h3>Ethical Hacking</h3>
+                        <p>This category is technical writing as well, but specifically around how to hack (ethically of course). There will also be some walkthroughs on ethical hacking challenges.</p>
+                        <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>                
+                    </section>
+                </Link>
+                    
+                <Link to={`/scripts`} className="intro-link">
+                    <section className="intro-text">
+                        <h3>Scripts</h3>
+                        <p>This category breaks down the scripts that I wrote line by line along with in depth explanations of how and why it works.</p>
+                        <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
+                    </section>
+                </Link>
 
-                <section className="intro-text">
-                <h3>Misc</h3>
-                <p>This category holds any blogposts that do not fall into any of the above categories... just Miscellaneous items.</p>
-                <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
-                </section>
+                <Link to={`/misc`} className="intro-link">
+                    <section className="intro-text">
+                        <h3>Misc</h3>
+                        <p>This category holds any blogposts that do not fall into any of the above categories... just Miscellaneous items.</p>
+                        <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
+                    </section>
+                </Link>
+
             </div>
             <hr/>
             
@@ -54,7 +79,7 @@ export default function Home(){
             <h2>About</h2>
             
             <p>Heyos!</p>
-            <p>My pen name is Mitsuki and I'm the author and creator of this blog.</p>
+            <p>I'm Mitsuki, the author and creator of this blog.</p>
             <p>Writing and art are my main hobbies, ethical hacking is my second, so I figured... why not combine em?</p>
 
             <p>If you like my blog, check out some of my other creations here:</p>

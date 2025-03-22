@@ -62,7 +62,7 @@ ul{
    display: flex;
 }
 
-ul a{
+ul a, .intro-link{
     text-decoration: none;
     color: rgb(192, 246, 163);
 }
@@ -98,7 +98,7 @@ ul a:hover{
     width: 15em;
     margin: 1.1em;
     align-items: center;
-    background-image: linear-gradient(rgb(28, 31, 28), rgb(59, 76, 73) ,rgb(100, 148, 126));
+    background-image: linear-gradient(rgb(100, 148, 126), rgb(59, 76, 73) ,rgb(28, 31, 28));
 }
 
 .intro-text h3, p {
@@ -113,6 +113,13 @@ ul a:hover{
 .intro-text p{
     height: 8em;
     padding-bottom: 2em;
+}
+
+.intro-text:hover{
+    width: 15.3em;
+    height: 30.5em;
+    color: rgb(192, 229, 182);
+    background-image: linear-gradient(rgb(119, 174, 149), rgb(68, 95, 90) ,rgb(28, 34, 28));
 }
 
 .intro-text-logo{
