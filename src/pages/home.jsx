@@ -71,7 +71,8 @@ export default function Home(){
             <p>Heyos!</p>
             <p>I'm Mitsuki, the author and creator of this blog.</p>
             <p>Writing and art are my main hobbies, ethical hacking is my second, so I figured... why not combine em?</p>
-            <p>All content (including art) on this blog is created by me. (No AI art or content - with the exception of using Gemini to help me when I ocassionally got stuck coding this website.)</p>
+            <p>All content (including art) on this blog is created by me.</p> 
+            <p>(No AI art or content - with the exception of using Gemini to help me when I ocassionally got stuck coding this website.)</p>
             <Link to={`/post/introducing-cy-and-den`} className="intro-link">
             <p>Wanna learn who/what Cyanscythe (Cy) and Goldenmage (Den) are? Click here!</p>
             </Link>
