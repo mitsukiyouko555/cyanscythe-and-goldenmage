@@ -1,5 +1,6 @@
 import postlist from "../posts/posts.json"
 import { Link } from "react-router-dom"
+import {createSlug} from "/src/utils.js"
 
 export default function Postlist(props){
 
@@ -21,7 +22,10 @@ export default function Postlist(props){
                     if (tags.includes(props.tag) || (props.flag == "all")){
                         return(
                             <li key={post.id} className="bloglink">
-                            <Link to={`/${post.id}`} style={{ textDecoration: 'none' }}>
+                                <Link
+                                    to={`/post/${createSlug(post.title)}`}
+                                    style={{ textDecoration: 'none' }}
+                                >                                
                                 <div className="post-card">
                                 <h2>{post.title}</h2>
                                 <small>Date Created: {post.date_created}</small>

@@ -101,7 +101,7 @@ ul a:hover{
     background-image: linear-gradient(rgb(100, 148, 126), rgb(59, 76, 73) ,rgb(28, 31, 28));
 }
 
-.intro-text h3, p {
+.intro-text h3, .intro-text p {
     display: flex;
     justify-content: center;
     color: rgb(219, 255, 209);
@@ -123,6 +123,7 @@ ul a:hover{
 }
 
 .intro-text-logo{
+    width: 75%;
     display: flex;
     justify-content: center;
     border: none;
@@ -182,6 +183,7 @@ ul a:hover{
     display: flex;
     justify-content: center;
     width: 100%;
+    max-height: fit-content;
     margin-bottom: 15px;
     border: none;
 }
@@ -202,12 +204,16 @@ ul a:hover{
     padding-right: 15%;
 }
 
-.content{
+.content {
     word-wrap: break-word;
+    line-height: 1.5;
+    
 }
 
-img{
-    width: 75%;
+p img{
+    max-width: 60em;
+    max-height: 40em;
+    width: auto;
     border: solid;
     border-width: thin;
 }

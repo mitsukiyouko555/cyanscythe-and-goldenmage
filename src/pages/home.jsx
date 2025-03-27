@@ -1,16 +1,6 @@
 import Postlist from "./postlist"
 import { Link } from "react-router-dom"
 
-
-{/* <li><Link to={`/home`}>Home</Link></li>
-<li><Link to={`/techwriting`}>How To's</Link></li>
-<li><Link to={`/projects`}>Projects</Link></li>
-<li><Link to={`/cyandden`}>Cy & Den</Link></li>
-<li><Link to={`/ethicalhacking`}>Ethical Hacking</Link></li>
-<li><Link to={`/scripts`}>Scripts</Link></li>
-<li><Link to={`/misc`}>Misc</Link></li> */}
-
-
 export default function Home(){
 
     return(
@@ -81,7 +71,10 @@ export default function Home(){
             <p>Heyos!</p>
             <p>I'm Mitsuki, the author and creator of this blog.</p>
             <p>Writing and art are my main hobbies, ethical hacking is my second, so I figured... why not combine em?</p>
-
+            <p>All content (including art) on this blog is created by me. (No AI art or content - with the exception of using Gemini to help me when I ocassionally got stuck coding this website.)</p>
+            <Link to={`/post/introducing-cy-and-den`} className="intro-link">
+            <p>Wanna learn who/what Cyanscythe (Cy) and Goldenmage (Den) are? Click here!</p>
+            </Link>
             <p>If you like my blog, check out some of my other creations here:</p>
             </div>
 

@@ -1,5 +1,5 @@
 ---
-title: Technical Writing testing
+title: Technical Writing testing2
 author: Mitsuki Youko
 date_created: 2025-03-06
 tag: techwriting

@@ -21,7 +21,7 @@ export default function App() {
               <Route path="/ethicalhacking" element={<Postlist blogtype="Ethical Hacking" image="/src/assets/banners/ethicalhacking.jpg" tag="ethicalhacking"/>}/>
               <Route path="/scripts" element={<Postlist blogtype="Scripts" image="/src/assets/banners/scripts.jpg" tag="scripts"/>}/>
               <Route path="/misc" element={<Postlist blogtype="Misc" image="/src/assets/banners/misc.jpg" tag="misc"/>}/>
-              <Route path="/:postId" element={<Actualpages/>}/>
+              <Route path="/post/:postTitleSlug" element={<Actualpages/>}/>
               <Route path="*" element={<h1>404 Page Not Found!</h1>} />
             </Routes>
           <Footer/>
