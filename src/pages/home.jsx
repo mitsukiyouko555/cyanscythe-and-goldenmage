@@ -5,7 +5,7 @@ export default function Home(){
 
     return(
         <>
-            <img className="post-img" src="/src/assets/banners/about.jpg"/>
+            <img className="post-img" src="/assets/banners/about.jpg"/>
             
 
             <h1>Welcome!</h1>
