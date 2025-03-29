@@ -7,6 +7,6 @@ import react from '@vitejs/plugin-react'
 // })
 
 export default defineConfig({
-  base: "cyanscythe-and-goldenmage",
+  base: "/cyanscythe-and-goldenmage",
   plugins: [react()],
 })
