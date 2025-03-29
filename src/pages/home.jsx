@@ -5,7 +5,7 @@ export default function Home(){
 
     return(
         <>
-            <img className="post-img" src="/assets/banners/about.jpg"/>
+            <img className="post-img" src="assets/banners/about.jpg"/>
             
 
             <h1>Welcome!</h1>
@@ -18,7 +18,7 @@ export default function Home(){
                     <section className="intro-text">
                         <h3>How To's</h3>
                         <p>These are technical writing blogs where I write tutorials about how to do certain technical things. They are basically "How-to" articles.</p>
-                        <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
+                        <img className="intro-text-logo" src="assets/socialmedialogos/personallogo.png"/>
                     </section>
             </Link>
 
@@ -26,7 +26,7 @@ export default function Home(){
                     <section className="intro-text">
                         <h3>Projects</h3>
                         <p>This is similar to the 'How To' category in terms of Technical Writing but each post revolves around how to do certain projects from beginning to end rather than just tips here and there.</p>
-                        <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
+                        <img className="intro-text-logo" src="assets/socialmedialogos/personallogo.png"/>
                     </section>
             </Link>
 
@@ -34,7 +34,7 @@ export default function Home(){
                     <section className="intro-text">
                         <h3>Cy & Den</h3>
                         <p>This category is sometimes depicted in short comics, or at times, is written like technical writing but with interjections from Cy and Den throughout and shown from both an Red and Blue Team perspective. </p>
-                        <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
+                        <img className="intro-text-logo" src="assets/socialmedialogos/personallogo.png"/>
                     </section>
                 </Link>
 
@@ -42,7 +42,7 @@ export default function Home(){
                     <section className="intro-text">
                         <h3>Ethical Hacking</h3>
                         <p>This category is technical writing as well, but specifically around how to hack (ethically of course). There will also be some walkthroughs on ethical hacking challenges.</p>
-                        <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>                
+                        <img className="intro-text-logo" src="assets/socialmedialogos/personallogo.png"/>                
                     </section>
                 </Link>
                     
@@ -50,7 +50,7 @@ export default function Home(){
                     <section className="intro-text">
                         <h3>Scripts</h3>
                         <p>This category breaks down the scripts that I wrote line by line along with in depth explanations of how and why it works.</p>
-                        <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
+                        <img className="intro-text-logo" src="assets/socialmedialogos/personallogo.png"/>
                     </section>
                 </Link>
 
@@ -58,7 +58,7 @@ export default function Home(){
                     <section className="intro-text">
                         <h3>Misc</h3>
                         <p>This category holds any blogposts that do not fall into any of the above categories... just Miscellaneous items.</p>
-                        <img className="intro-text-logo" src="/src/assets/socialmedialogos/personallogo.png"/>
+                        <img className="intro-text-logo" src="assets/socialmedialogos/personallogo.png"/>
                     </section>
                 </Link>
 
@@ -82,19 +82,19 @@ export default function Home(){
             <div className="smlogo-wrapper">
                 
                 <a href="https://www.youtube.com/@mitsukiyouko">
-                    <img className="smlogo" src="/src/assets/socialmedialogos/youtube.png"/> 
+                    <img className="smlogo" src="assets/socialmedialogos/youtube.png"/> 
                 </a>
                 <a href="https://buymeacoffee.com/mitsukiyouko">
-                    <img className="smlogo" src="/src/assets/socialmedialogos/bmc.png"/> 
+                    <img className="smlogo" src="assets/socialmedialogos/bmc.png"/> 
                 </a>
                 <a href="https://github.com/mitsukiyouko555">
-                    <img className="smlogo" src="/src/assets/socialmedialogos/github.png"/> 
+                    <img className="smlogo" src="assets/socialmedialogos/github.png"/> 
                 </a>
                 <a href="https://mitsukiyouko555.wixsite.com/portfolio">
-                    <img className="smlogo" src="/src/assets/socialmedialogos/personallogo.png"/> 
+                    <img className="smlogo" src="assets/socialmedialogos/personallogo.png"/> 
                 </a>
                 <a href="https://mitsukiyouko555.github.io/hackwebcomic/">
-                    <img className="smlogo" src="/src/assets/socialmedialogos/hack.png"/> 
+                    <img className="smlogo" src="assets/socialmedialogos/hack.png"/> 
                 </a>
             </div>
             <br/>

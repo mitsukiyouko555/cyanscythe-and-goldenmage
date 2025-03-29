@@ -16,4 +16,4 @@ Image goes here:
 
 <test what its like to put an image here..>
 
-![testimage2](/src/content/Blogpost2/img/1.jpg)
+![testimage2](assets/content/Blogpost2/img/1.jpg)
