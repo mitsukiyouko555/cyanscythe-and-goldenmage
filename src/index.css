@@ -4,12 +4,12 @@
 
 @font-face{
     font-family: "Avenir";
-    src:url(assets/fonts/Avenir.ttc)
+    src:url(/assets/fonts/Avenir.ttc)
 }
 
 @font-face{
     font-family: "Yeysk";
-    src:url(assets/fonts/YeyskRegular-JzaM.otf)
+    src:url(/assets/fonts/YeyskRegular-JzaM.otf)
 }
 
 .blogtitle{
