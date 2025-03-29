@@ -31,12 +31,12 @@ Hope you enjoy the blog!
 
 When in Neutral mode, Cy's scythe is blue but it turns red when she is attacking.
 
-![Cy Neutral Mode](/src/content/IntroCyAndDen/img/Cy%20Neutral%20Mode.jpg)
-![Cy Attacker Mode](/src/content/IntroCyAndDen/img/Cy%20Attacker%20Mode.jpg)
+![Cy Neutral Mode](assets/content/IntroCyAndDen/img/Cy%20Neutral%20Mode.jpg)
+![Cy Attacker Mode](assets/content/IntroCyAndDen/img/Cy%20Attacker%20Mode.jpg)
 
 #### Den's Character and Weapons Design:
 
 Den's Barriers are not just for defensive purposes - he can use them to attack as well!
 
-![Den](/src/content/IntroCyAndDen/img/Den.jpg)
-![Den Weapon Design](/src/content/IntroCyAndDen/img/Den%20Weapons%20Design.png)
+![Den](assets/content/IntroCyAndDen/img/Den.jpg)
+![Den Weapon Design](assets/content/IntroCyAndDen/img/Den%20Weapons%20Design.png)
