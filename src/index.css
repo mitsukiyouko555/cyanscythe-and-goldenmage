@@ -209,10 +209,16 @@ ul a:hover{
     line-height: 1.5;
 }
 
-p img{
+p .content img{
     max-width: 60em;
     max-height: 40em;
     width: auto;
+    border: solid;
+    border-width: thin;
+}
+
+.special-content img{
+    height: 100%;
     border: solid;
     border-width: thin;
 }

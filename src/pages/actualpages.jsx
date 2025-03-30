@@ -33,7 +33,7 @@ const post = postlist.find(post => createSlug(post.title) === postTitleSlug);
                 <hr width="70%"/>
                 <div className="content-wrapper">
                     
-                    <Markdown className="content">{post.content}</Markdown>
+                    {post.tag == "cyandden" ? <Markdown className="special-content">{post.content}</Markdown> : <Markdown className="content">{post.content}</Markdown>}
                 </div>
             </div>
         </>
