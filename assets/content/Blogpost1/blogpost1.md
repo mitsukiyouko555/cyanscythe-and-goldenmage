@@ -1,19 +1,15 @@
 ---
-title: Technical Writing testing
+title: Cy and Den Test
 author: Mitsuki Youko
 date_created: 2025-03-06
-tag: techwriting
-blurb: blurb for the first post
+tag: cyandden
+blurb: Testing Cy and Den tag
 ---
 
-# Heading 1
-
-### Heading 3
-
-Paragraph goes here...
-
-Image goes here:
-
-<test what its like to put an image here..>
+Pretend this is a Cy and Den infographic.. this is how the images would display AKA at full width vs the other technical writing-esque pics which display at a resonably smaller size.
 
 ![testimage](assets/content/Blogpost1/img/1.png)
+
+<!-- test -->
+
+![test](assets/content/Blogpost1/img/2.jpg)
