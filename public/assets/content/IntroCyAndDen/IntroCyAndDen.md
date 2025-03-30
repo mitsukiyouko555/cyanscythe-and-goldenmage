@@ -2,7 +2,7 @@
 title: Introducing Cy and Den
 author: Mitsuki Youko
 date_created: 2025-03-27
-tag: cyandden
+tag: misc
 blurb:
 ---
 
