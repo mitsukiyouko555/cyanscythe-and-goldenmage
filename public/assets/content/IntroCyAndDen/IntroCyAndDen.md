@@ -3,12 +3,12 @@ title: Introducing Cy and Den
 author: Mitsuki Youko
 date_created: 2025-03-27
 tag: misc
-blurb:
+blurb: Introducing Cyanscythe and Goldenmage
 ---
 
 ### What is / Who are CyanScythe (Cy) and GoldenMage (Den)?
 
-I've always loved drawing and creating characters and figured... Why not mash that and what I learn in Ethical Hacking together?
+I love drawing and creating characters and figured... Why not mash that and what I learn in Ethical Hacking together?
 That gave me the idea of drawing infographics whenever I learned something that could be infographic-worthy.
  
 Since I needed a name for my blog I just randomly came up with the word CyanScythe and created a character based off of that which I thought would be cool as an attacker type character. Then I thought "Well attacker = red team.. so I'll need a "defender" and so I created GoldenMage.

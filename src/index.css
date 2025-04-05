@@ -37,7 +37,7 @@ body{
     font-family: "Avenir";
     color: rgb(229, 255, 192);
     /* background-image: linear-gradient(rgb(184, 255, 181),rgb(128, 241, 185)); */
-    background-image: linear-gradient(rgb(28, 31, 28), rgb(59, 76, 73) ,rgb(100, 148, 126));
+    background-image: linear-gradient(rgb(28, 33, 33), rgb(59, 76, 73) ,rgb(77, 126, 110));
 }
 
 footer{
@@ -69,7 +69,7 @@ ul{
 
 ul a, .intro-link, a{
     text-decoration: none;
-    color: rgb(113, 239, 153);
+    color: rgb(170, 254, 184);
 }
 
 ul a:hover{
@@ -215,11 +215,13 @@ ul a:hover{
 }
 
 .content img{
-    max-width: 60em;
+    max-width: 100%;
     max-height: 40em;
-    width: 100%;
-    height: auto;
     border: solid;
     border-width: thin;
 }
 
+.content a{
+    text-decoration: underline;
+    color: rgb(38, 255, 0);
+}
