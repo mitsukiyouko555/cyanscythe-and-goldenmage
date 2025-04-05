@@ -193,7 +193,7 @@ This is so that when you pan, you start with lining up the right side of this im
 
 It'll probably make more sense to see it in action... (Keep in mind this is still quite rough... but it gets the point across..)
 
-Here's the vid on youtube as the raw vid is too big for me to host on github unfortunately: [https://youtu.be/Z0TCPKRYMY8](https://youtu.be/Z0TCPKRYMY8)..
+Here's the vid on youtube as the raw vid is too big for me to host on github unfortunately: [https://youtu.be/Z0TCPKRYMY8](https://youtu.be/Z0TCPKRYMY8).
 
 <!--  
 
