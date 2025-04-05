@@ -3,7 +3,7 @@ title: Introducing Cy and Den
 author: Mitsuki Youko
 date_created: 2025-03-27
 tag: misc
-blurb:
+blurb: Introducing Cyanscythe and Goldenmage
 ---
 
 ### What is / Who are CyanScythe (Cy) and GoldenMage (Den)?
