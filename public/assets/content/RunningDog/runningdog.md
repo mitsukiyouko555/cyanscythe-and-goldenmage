@@ -193,9 +193,7 @@ This is so that when you pan, you start with lining up the right side of this im
 
 It'll probably make more sense to see it in action... (Keep in mind this is still quite rough... but it gets the point across..)
 
-This one is sped up so it doesn't take as much space on my github.. If you want to see the video at normal speed, here is the link: [https://youtu.be/Z0TCPKRYMY8](https://youtu.be/Z0TCPKRYMY8).
-
-![cloudwrapdemo](assets/content/RunningDog/img/CloudWrapDemo.mov)
+Here's the vid on youtube as the raw vid is too big for me to host on github unfortunately: [https://youtu.be/Z0TCPKRYMY8](https://youtu.be/Z0TCPKRYMY8).
 
 
 
