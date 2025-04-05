@@ -195,7 +195,15 @@ It'll probably make more sense to see it in action... (Keep in mind this is stil
 
 Here's the vid on youtube as the raw vid is too big for me to host on github unfortunately: [https://youtu.be/Z0TCPKRYMY8](https://youtu.be/Z0TCPKRYMY8)..
 
+<!--  
 
+Note to self:
+- animate the grass slowly blowing in the wind
+- animate the shadow under the dog
+- assemble the bg in the dog running file
+- 
+
+-->
 
 
 <!-- 
