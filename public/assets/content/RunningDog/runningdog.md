@@ -195,18 +195,62 @@ It'll probably make more sense to see it in action... (Keep in mind this is stil
 
 Here's the vid on youtube as the raw vid is too big for me to host on github unfortunately: [https://youtu.be/Z0TCPKRYMY8](https://youtu.be/Z0TCPKRYMY8).
 
-<!--  
+Moving on, I added some "mountains" in the bg as well as some bushes.
+
+(Ignore the bad bush/nature art XD I'm just half assing the bg rn since this critique is mainly about making the bg feel like it is moving properly and making the whole thing feel like its moving cohesively.)
+
+I then added some (badly drawn) grass that is supposed to go in front of the dog and the bushes. I'll animate the grass for maybe like 3-4 frames for a quick gentle sway, color it, then copy and paste it across the screen.
+
+![grass](assets/content/RunningDog/img/grass.jpg)
+
+The dog's animation layer will go between the grass and the bushes.
+
+So the grass will cover the dog when they overlap and the dog will cover the bushes when they overlap.
+
+Additionally, this is the order of animation layers from moving the fastest to slowest in terms of panning:
+
+1. Grass (Fast when compared to the others but not SUPER fast either..)
+2. Dog (about the same speed as the grass)
+3. Ground/Bushes (slower than the dog)
+4. Mountains (slower than the bushes)
+5. Clouds (the slowest)
+
+Here is the badly animated grass (Ok enough for the critique tutorial.. def not up to par for my personal work tho lol)
+
+![badgrassanim](assets/content/RunningDog/img/badgrassanim.gif)
+
+Here it is colored:
+
+![grasscolored](assets/content/RunningDog/img/grasscolored.gif)
+
+Here it is with the grass strewn across the page.
+
+![grassfullanim](assets/content/RunningDog/img/grassfullanim.gif)
+
+And because we are only seeing parts of it at a time, it won't seem too repetitive.. otherwise ideally one should draw different strands of grass throughout at least half of it or draw a few chunks of grass and mix up the order for variety - but even like this it seems alright.. (if you don't look too closely)
+
+
+
+<!--
 
 Note to self:
-- animate the grass slowly blowing in the wind
-- animate the shadow under the dog
-- assemble the bg in the dog running file
-- 
+- [x] animate the grass slowly blowing in the wind
+- [ ] Color and shade the bushes
+- [ ] Color and shade the mountains roughly
+- [ ] Use a gradient for the sky.
+- [ ] 
+- [ ] animate the shadow under the dog
+- [ ] assemble the bg in the dog running file
+- [ ] 
 
 -->
 
+### Additional Resources:
 
-<!-- 
+Good vid on Animating Backgrounds: [https://www.youtube.com/watch?v=M7yirNAyD5M](https://www.youtube.com/watch?v=M7yirNAyD5M)
+
+
+<!--
 
 npm run server
 npm run build

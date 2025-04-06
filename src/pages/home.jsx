@@ -8,7 +8,7 @@ export default function Home(){
             <img className="post-img" src="assets/banners/about.jpg"/>
             
 
-            <h1>Welcome!</h1>
+            <h1>Welcome! (This Blogsite is still under construction!)</h1>
             <hr/>
             <h2>The Cyanscythe and Goldenmage Blog consists of 6 categories:</h2>
 
