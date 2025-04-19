@@ -3,14 +3,14 @@ title: Running Dog Animation Critique
 author: Mitsuki Youko
 date_created: 2025-04-03
 tag: misc
-blurb: Running Dog Anim Critique for u/remyisacutie
+blurb: Running Dog Anim Critique for Redditor u/remyisacutie.
 ---
 
 # (WIP)
 
 ### Overview
 
-This blogpost is a bit different than my others as I will be breaking down my animation and composting process for [this reddit post](https://www.reddit.com/r/animation/comments/1jqdx7c/ik_this_is_wrong_but_how_do_i_fix_it/).
+This blogpost is a bit different than my others as I will be breaking down my animation and composting process for [this reddit post](https://www.reddit.com/r/animation/comments/1jqdx7c/ik_this_is_wrong_but_how_do_i_fix_it/) by u/remyisacutie.
 
 Here is u/remyisacutie's original animation:
 
@@ -19,20 +19,20 @@ Here is u/remyisacutie's original animation:
 Here are my initial thoughts on it:
 
 1. Dog's eyes are too static, introduce some blink
-2. belly flops around a bit toooo much.. its like his ribs are moving - seems slightly unnatural.. if he just has a fat belly, the flop should be lower. (imo)
-3. legs are good but not quite on the ground
-4. no shadow
-5. cloud moving in different directions.. i guess that kinda works but if there's wind thats impacting the clouds that much, the trees would be affected a little too..
-6. ears, tail, and legs are actually quite good!
-7. tongue looks like its being swung forward.. doesn't quite match the running direction i feel...
-8. Tail is decent but it gets a little bit longer near the end.. (i struggle with that sometimes when i animate hair XD)
-9. Weight looks like it is on all 4 legs at the same time... i feel that when landing, weight should be on the front legs... this can probs be fixed simply by transforming and tilting the whole dog snout-side down just a tiny bit...
-10. neck wrinkles are good but slightly off on timing it feels like..
-11. looks like the path/ground is going z-axis yet the dog is running x axis which looks a bit.. strange i guess? but that might just be the placement cuz its not moving.. if the floor is moving, it would sell the thing a bit more...
-12. imo the reason why it doesn't loop well is cus you probs need one more frame for some of the poses like the jump between the last and first frame is too big.
-13. lighting.. the lighting changes too quickly on the dog like its running past a spotlight.. if its sunlight because its so far away, it wouldn't move on the dog that fast.
-14. camera movement (maybe when landing, camera should follow the land a little - not TOO drastically but just a little movement helps)
-15. when looping always think back to HOW it loops. do sketches first to see if it loops properly.. (before coloring or linearting) one trick is on the second half of the loop, use the frames in the first half in reversed order, then change some stuff in each so it doesn't just look like a copy
+2. Belly flops around a bit toooo much.. its like his ribs are moving - seems slightly unnatural.. if he just has a fat belly, the flop should be lower. (imo)
+3. Legs are good but not quite on the ground
+4. No shadow
+5. Cloud moving in different directions.. i guess that kinda works but if there's wind thats impacting the clouds that much, the trees would be affected a little too..
+6. Ears, tail, and legs are actually quite good!
+7. Tongue looks like its being swung forward.. doesn't quite match the running direction i feel...
+8. Tail is decent but it gets a little bit longer near the end.. (I struggle with that sometimes when I animate hair XD)
+9. Weight looks like it is on all 4 legs at the same time... I feel that when landing, weight should be on the front legs... this can probs be fixed simply by transforming and tilting the whole dog snout-side down just a tiny bit...
+10. Neck wrinkles are good but slightly off on timing it feels like..
+11. Looks like the path/ground is going z-axis yet the dog is running x axis which looks a bit.. strange i guess? but that might just be the placement cuz its not moving.. if the floor is moving, it would sell the thing a bit more...
+12. Imo the reason why it doesn't loop well is cus you probs need one more frame for some of the poses like the jump between the last and first frame is too big.
+13. Lighting.. The lighting changes too quickly on the dog like its running past a spotlight.. if its sunlight because its so far away, it wouldn't move on the dog that fast.
+14. Camera movement (maybe when landing, camera should follow the land a little - not TOO drastically but just a little movement helps)
+15. When looping always think back to HOW it loops. Do sketches first to see if it loops properly.. (before coloring or linearting). One trick is on the second half of the loop, use the frames in the first half in reversed order, then change some stuff in each so it doesn't just look like a copy
 
 ---
 
@@ -229,6 +229,44 @@ Here it is with the grass strewn across the page.
 
 And because we are only seeing parts of it at a time, it won't seem too repetitive.. otherwise ideally one should draw different strands of grass throughout at least half of it or draw a few chunks of grass and mix up the order for variety - but even like this it seems alright.. (if you don't look too closely)
 
+I had the grass in a different file so I straight up copied the grass animation folder into the running dog csp file.
+
+I have the already animated grass layer above the dog running layer and keygramed the grass layer like so:
+
+![dogAndGrassKeyframe](assets/content/RunningDog/img/dogAndGrassKeyframe.jpg)
+
+And now it looks like this:
+
+![dogAndGrass](assets/content/RunningDog/img/dogAndGrass.gif)
+
+This is rough.. but will probs refine it later.
+
+Colored and "animated" the clouds via transform and keyframes.
+
+Note - this is one of the reasons why I prefer to NOT bake in my composite...
+
+![mehclouds.gif](assets/content/RunningDog/img/mehclouds.gif)
+
+![mehclouds.jpg](assets/content/RunningDog/img/MehClouds.jpg)
+
+As you can see, the clouds are basically forced to move at the same speed as the grass and it looks unnatural.. This is because the rest of the animation is within the 27 frames I have here. If i were to expand the number of frames, the dog and grass would be empty or the cutoff would be weird.
+
+BUT when compositing/video editing after exporting it out, you have a LOT more control over the individual elements and how fast or slow they move.
+
+You can have the clouds move much slower and just keep looping the dog and the grass via copy and paste once you have the first loop down and make the duration long enough to cover the duration of the clouds. (I will demo that later)
+
+Added the bg and the ground.. though as you can see, if the ground is static, it would look very strange and out of place as everything else is moving.
+
+![runningdogstaticfloor.gif](assets/content/RunningDog/img/runningdogstaticfloor.gif)
+
+![runningdogmovingfloor.gif](assets/content/RunningDog/img/runningdogmovingfloor.gif)
+
+Not sure why the bg is so choppy like that.. but we can probs fix that in compositing.. I think that's part of why I prefer exporting and then compositing it otherwise you get weird artifacts like this.
+
+In any case, as you can see, the floor being moved along like a treadmill adds to the movement.
+
+The clouds really bother me tho.. can't wait to fix them when I composite XD
+
 
 
 <!--
@@ -237,11 +275,13 @@ Note to self:
 - [x] animate the grass slowly blowing in the wind
 - [ ] Color and shade the bushes
 - [ ] Color and shade the mountains roughly
-- [ ] Use a gradient for the sky.
-- [ ] 
+- [ ] Add a layer of color for shading purposes on a blending mode layer on top of everything else. 
+- [x] Use a gradient for the sky. 
 - [ ] animate the shadow under the dog
 - [ ] assemble the bg in the dog running file
-- [ ] 
+- [ ] Export everything separately
+- [ ] Assemble in Da Vinci Resolve
+- [ ] Compositing with the Reactor Plugin (Da Vinci Resolve Ver 19.0 ONLY) and Finishing Touches
 
 -->
 

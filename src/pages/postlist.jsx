@@ -28,9 +28,9 @@ export default function Postlist(props){
                                 >                                
                                 <div className="post-card">
                                 <h2>{post.title}</h2>
-                                <small>Date Created: {post.date_created}</small>
+                                <small> <strong>Date Created:</strong> {post.date_created}</small>
                                 <br/>
-                                <small>Author: {post.author}</small>
+                                <small><strong>Author:</strong> {post.author}</small>
                                 <br/>
                                 <br/>
                                 <strong><small>Description:</small></strong>
