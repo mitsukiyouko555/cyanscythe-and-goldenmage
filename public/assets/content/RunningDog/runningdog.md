@@ -267,18 +267,68 @@ In any case, as you can see, the floor being moved along like a treadmill adds t
 
 The clouds really bother me tho.. can't wait to fix them when I composite XD
 
+Moving on.. I fininshed the floor and the bushes and ended up putting them on the same layer.. I like how it came out.
+
+Here is a PNG of it.
+![bushesAndGround.png](assets/content/RunningDog/img/bushesAndGround.png)
+
+
+I don't like the mountains tho.. but that's cus I didn't try too hard since I have other projects to work on and this project was taking longer than anticipated XD
+
+![mountains.png](assets/content/RunningDog/img/mountains.png)
+
+As I was experimenting, I found that layering the mountains and having the layers move at different speeds (further ones moving slower, closer ones moving faster) makes it look better.
+
+![runningDogWithBg.gif](assets/content/RunningDog/img/runningDogWithBg.gif)
+
+However, I still don't like how hard it is to time everything (when you have a lot of moving pieces like this) all within CSP. This would be much easier to do with say, Da Vinci Resolve, Adobe Premiere Pro, or some kind of video editor so that everything can have a different speed.
+
+Random note: I shaded the grass a little but but because of how I did the keyframes, its too much work to implement it into the csp ver so I will use it in the Compositing ver.
+
+For now, just know that the grass now looks like this:
+
+![shadedGrass.png](assets/content/RunningDog/img/shadedGrass.png)
+
+Though you probably can't tell from far away. (But don't worry, it'll be enlarged during the compositing phase.)
+
+![shadedGrass.gif](assets/content/RunningDog/img/shadedGrass.gif)
+
+So now my background layers are all done (though in a real project I would add a lot more shading first) and consists of the following Layers (ordered by furthest to closest):
+
+1. Sky
+
+![sky.jpg](assets/content/RunningDog/img/sky.jpg)
+
+2. Clouds
+
+![clouds.png](assets/content/RunningDog/img/clouds.png)
+
+3. Mountains
+
+![mountains.png](assets/content/RunningDog/img/mountains.png)
+
+4. Ground / Bushes
+
+![bushesAndGround.png](assets/content/RunningDog/img/bushesAndGround.png)
+
+5. Grass
+
+![GrassNoBg.gif](assets/content/RunningDog/img/GrassNoBg.gif)
+
+As you can see, only the Grass is actually animated.. the rest are all "animated" by literally transforming and moving the images around.
+
 
 
 <!--
 
 Note to self:
 - [x] animate the grass slowly blowing in the wind
-- [ ] Color and shade the bushes
-- [ ] Color and shade the mountains roughly
+- [x] Color and shade the bushes
+- [x] Color and shade the mountains roughly
 - [ ] Add a layer of color for shading purposes on a blending mode layer on top of everything else. 
 - [x] Use a gradient for the sky. 
 - [ ] animate the shadow under the dog
-- [ ] assemble the bg in the dog running file
+- [x] assemble the bg in the dog running file
 - [ ] Export everything separately
 - [ ] Assemble in Da Vinci Resolve
 - [ ] Compositing with the Reactor Plugin (Da Vinci Resolve Ver 19.0 ONLY) and Finishing Touches
