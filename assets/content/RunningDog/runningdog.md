@@ -317,8 +317,6 @@ So now my background layers are all done (though in a real project I would add a
 
 As you can see, only the Grass is actually animated.. the rest are all "animated" by literally transforming and moving the images around.
 
-
-
 <!--
 
 Note to self:
