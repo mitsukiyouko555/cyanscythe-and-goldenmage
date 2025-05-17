@@ -72,9 +72,9 @@ I anticipate coming out of this project with a bunch of art created, as well as 
 ### Research
 
 ### Issues:
-- imports not importing (specifically keras.) fix: https://stackoverflow.com/questions/78998877/import-tensorflow-keras-callbacks-import-earlystopping-modelcheckpoint-could-n
-
-Calling Keras via `from keras.src.callbacks import xyz` instead of keras.callbacks
+1. imports not importing (specifically keras.) 
+    - Fix: [https://stackoverflow.com/questions/78998877/import-tensorflow-keras-callbacks-import-earlystopping-modelcheckpoint-could-n](https://stackoverflow.com/questions/78998877/import-tensorflow-keras-callbacks-import-earlystopping-modelcheckpoint-could-n)
+    - Calling Keras via from `keras.src.callbacks import xyz` instead of keras.callbacks is what fixed it.
 
 #### Phase 1 - Eyes Only
 
