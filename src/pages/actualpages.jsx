@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import postlist from "../posts/posts.json"
 import Markdown from "react-markdown"
 import {createSlug} from "/src/utils.js"
+import rehypeRaw from "rehype-raw"
 
 
 export default function Actualpages(){
@@ -33,7 +34,8 @@ const post = postlist.find(post => createSlug(post.title) === postTitleSlug);
                 <hr width="70%"/>
                 <div className="content-wrapper">
                     
-                    {post.tag == "cyandden" ? <Markdown className="special-content">{post.content}</Markdown> : <Markdown className="content">{post.content}</Markdown>}
+                    {post.tag == "cyandden" ? <Markdown className="special-content" rehypePlugins={[rehypeRaw]}>{post.content}
+                    </Markdown> : <Markdown className="content" rehypePlugins={[rehypeRaw]}>{post.content}</Markdown>}
                 </div>
             </div>
         </>

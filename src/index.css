@@ -67,6 +67,10 @@ ul{
    display: flex;
 }
 
+.content ul{
+    display: block;
+}
+
 ul a, .intro-link, a{
     text-decoration: none;
     color: rgb(170, 254, 184);

@@ -14,7 +14,9 @@ This blogpost is a bit different than my others as I will be breaking down my an
 
 Here is u/remyisacutie's original animation:
 
-![runningdog](assets/content/RunningDog/img/runningdog.mp4)
+![runningdog](assets/content/RunningDog/img/runningdog.gif)
+
+FYI: I am not a professional artist or animator. I'm a hobbyist so take my critique with however many grains of salt you'd like.
 
 Here are my initial thoughts on it:
 
@@ -24,7 +26,7 @@ Here are my initial thoughts on it:
 4. No shadow
 5. Cloud moving in different directions.. i guess that kinda works but if there's wind thats impacting the clouds that much, the trees would be affected a little too..
 6. Ears, tail, and legs are actually quite good!
-7. Tongue looks like its being swung forward.. doesn't quite match the running direction i feel...
+7. Tongue looks like its being swung forward.. doesn't quite match the running direction...
 8. Tail is decent but it gets a little bit longer near the end.. (I struggle with that sometimes when I animate hair XD)
 9. Weight looks like it is on all 4 legs at the same time... I feel that when landing, weight should be on the front legs... this can probs be fixed simply by transforming and tilting the whole dog snout-side down just a tiny bit...
 10. Neck wrinkles are good but slightly off on timing it feels like..
@@ -41,10 +43,11 @@ Here are my initial thoughts on it:
 #### Animation Layers:
 1. Dog
 2. Shadow
-3. Foreground (ground and trees)
+3. Foreground (Grass)
+4. Midground(ground and trees)
     1. Make the ground long so that it you can move it x-axis. 
-4. Background (clouds)
-5. Sky
+5. Background (clouds and mountains)
+6. Sky
 
 #### My Workflow for this critique demo:
 1. Sketch the dog running
@@ -62,7 +65,7 @@ Here are my initial thoughts on it:
 2. Dog running with animated bg (Compositing after Exporting)
 
 #### Composting tips:
-1. Export EACH animation layer separately so as to be able to add effects to them.. by layers I don't mean the dog's legs being on a different layer than its eyes... I mean Dog and its sublayers get exported as 1 png animation, bg gets exported as its own animation etc.. Anything you need to composite separately gets exported as its own png gif or image sequence.
+1. Export EACH animation layer separately so as to be able to add effects to them.. by layers I don't mean the dog's legs being on a different layer than its eyes... I mean Dog and its sublayers get exported as 1 png animation, the grass get exported as its own animation etc.. Anything you need to composite separately gets exported as its own png gif or image sequence.
 
 ---
 
@@ -317,15 +320,84 @@ So now my background layers are all done (though in a real project I would add a
 
 As you can see, only the Grass is actually animated.. the rest are all "animated" by literally transforming and moving the images around.
 
+Now, back to the badly drawn dog (didn't use references for most of it thats why).... 
+
+Yes.. Yes, I know, there are many things wrong with this dog animation (since I'm not really trying very hard with this dog...) but... that is not the point of this blogpost.. the point of this blog post is to answer the question, per the reddit post: "How do I get the light and clouds to align with the dog and the land isn’t moving so its just ends up looking like a mess"... Otherwise I'd be spending WAY more time on this dog than I already am....
+
+Aight.. here's the lineart of the dog:
+
+![runningdoglineart.gif](assets/content/RunningDog/img/runningdoglineart.gif)
+
+And here is the lineart with the shadow (also roughly done...):
+
+![runningdogwithshadow.gif](assets/content/RunningDog/img/runningdogwithshadow.gif)
+
+Here, I like to do a rough check of the lineart by watching it loop while focusing on different parts of the animation.
+
+Watch the loop and focus on just the tail and check if it looks ok.
+Then observe just the back legs, then just the front legs, then just the torso, then just the eyes, then just the tongue, and.. you get the idea..
+
+By only observing PARTS of the animation at once, it helps you better spot the looping errors - especially if part of the animation seems to not be very smooth but you can't figure out exactly where. (For example, the fur on the nape of the dog's neck appears and disappears too suddenly. I should probably add a few more frames where the fur eases in and out for better flow.)
+
+Example: 
+
+Focusing on the Ears:
+
+![Ears.gif](assets/content/RunningDog/img/Ears.gif)
+
+Tongue:
+
+![Tongue.gif](assets/content/RunningDog/img/Tongue.gif)
+
+Forelegs:
+
+![Forelegs.gif](assets/content/RunningDog/img/Forelegs.gif)
+
+Back Legs:
+
+![BackLegs.gif](assets/content/RunningDog/img/BackLegs.gif)
+
+Tail:
+
+![Tail.gif](assets/content/RunningDog/img/Tail.gif)
+
+Added some gentle/light baked in comp.. 
+
+Just a tiny bit of atmospheric lighting + contrast on top of everything.
+
+![bakedInComp.jpg](assets/content/RunningDog/img/bakedInComp.jpg)
+
+Here is what it looks like without the baked in comp:
+
+![runningDogNoComp.gif](assets/content/RunningDog/img/runningDogNoComp.gif)
+
+And here is what it looks like with the comp:
+
+![runningDogBakedInComp.gif](assets/content/RunningDog/img/runningDogBakedInComp.gif)
+
+As you can see, the gradient lighting and added contrast gives it more depth.
+
+Now, I could go further and add and lighting shading on everything individually (and most of the time I do but I'll leave it like this for this one since its not a serious project...)
+
+Laid down some color flats. (Orig I made the dog darker but the value was too close to the bg so I made him a lighter gray.)
+
+![runningDogFlats.gif](assets/content/RunningDog/img/runningDogFlats.gif)
+
+---
+
+### Critique of my own animation:
+1. 
+
+
 <!--
 
 Note to self:
 - [x] animate the grass slowly blowing in the wind
 - [x] Color and shade the bushes
 - [x] Color and shade the mountains roughly
-- [ ] Add a layer of color for shading purposes on a blending mode layer on top of everything else. 
+- [x] Add a layer of color for shading purposes on a blending mode layer on top of everything else. 
 - [x] Use a gradient for the sky. 
-- [ ] animate the shadow under the dog
+- [x] animate the shadow under the dog
 - [x] assemble the bg in the dog running file
 - [ ] Export everything separately
 - [ ] Assemble in Da Vinci Resolve
