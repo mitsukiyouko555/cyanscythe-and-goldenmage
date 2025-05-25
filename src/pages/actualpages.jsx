@@ -5,6 +5,10 @@ import {createSlug} from "/src/utils.js"
 import rehypeRaw from "rehype-raw"
 
 
+const LazyLoading = ({src, alt, title}) => {
+    return <img src={src} alt={alt} title={title} loading="lazy" />;
+}
+
 export default function Actualpages(){
 
 // This PostTitleSlug was created with the help of Gemini
@@ -18,6 +22,10 @@ const post = postlist.find(post => createSlug(post.title) === postTitleSlug);
                 <h1>Blog Post Not Found!</h1>
             </div>
         )
+    }
+
+    const markdownComponents ={
+        img: LazyLoading,
     }
 
     return(
@@ -34,8 +42,8 @@ const post = postlist.find(post => createSlug(post.title) === postTitleSlug);
                 <hr width="70%"/>
                 <div className="content-wrapper">
                     
-                    {post.tag == "cyandden" ? <Markdown className="special-content" rehypePlugins={[rehypeRaw]}>{post.content}
-                    </Markdown> : <Markdown className="content" rehypePlugins={[rehypeRaw]}>{post.content}</Markdown>}
+                    {post.tag == "cyandden" ? <Markdown className="special-content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}
+                    </Markdown> : <Markdown className="content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}</Markdown>}
                 </div>
             </div>
         </>
