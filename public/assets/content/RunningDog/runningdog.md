@@ -6,8 +6,6 @@ tag: misc
 blurb: Running Dog Anim Critique for Redditor u/remyisacutie.
 ---
 
-# (WIP)
-
 ### Overview
 
 This blogpost is a bit different than my others as I will be breaking down my animation and composting process for [this reddit post](https://www.reddit.com/r/animation/comments/1jqdx7c/ik_this_is_wrong_but_how_do_i_fix_it/) by u/remyisacutie.
@@ -700,7 +698,7 @@ Da Vinci Resolve Color Grading/Correction Tuts:
 
 ---
 
-## If you read this far, thanks for reading and I hoped it was helpful and hope you enjoyed it! :D
+#### If you read this far, thanks for reading and I hoped it was helpful and hope you enjoyed it! :D
 
 
 <!--
