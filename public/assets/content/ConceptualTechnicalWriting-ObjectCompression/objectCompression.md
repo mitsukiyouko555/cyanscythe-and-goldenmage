@@ -1,22 +1,33 @@
 ---
-title: Conceptual Technical Writing - Minimizer
+title: Conceptual Technical Writing - Minimizer (WIP)
 author: Mitsuki Youko
 date_created: 2025-05-31
 tag: techwriting
 blurb: A blogpost showcasing the application of my technical writing skills to a conceptual mechanism.
 ---
 
-# Premise
+## Premise
 
 This is a technical writing sample (for portfolio purposes), revolving around a conceptual Futuristic Object Compression Mechanism, used in the year 3050, called the "Minimizer" from my [Personal Project](https://mitsukiyouko555.wixsite.com/portfolio/personal-project).
 
-# Technical Writing
+---
 
-### Compression
+## How to Compress and Decompress Objects with Minimizer
+
+Minimizer App Logo:
+
+![logo](assets/content/ConceptualTechnicalWriting-ObjectCompression/img/logo-smallest.png)
+
+
+### How to Compress Objects
 
 1. Activate your holo
 
+![holo](assets/content/ConceptualTechnicalWriting-ObjectCompression/img/holo.png)
+
 2. Open the compression app
+
+![logoclick](assets/content/ConceptualTechnicalWriting-ObjectCompression/img/logoclick.png)
 
 3. Click scan and point your holo's camera towards the object. Once scanned, the item is linked and absorbed into your holo for compression purposes.
     
@@ -55,7 +66,7 @@ This is a technical writing sample (for portfolio purposes), revolving around a 
 11. Click Export and The holo will present the compressed item to you (it comes out of the holo, between the user and the holo.)
 	1. on opposite sides of the item, there is a half circle. so long as those remain as is, the item will remain compressed
 
-### Decompression
+### How to Decompress Objects
 
 1. To Decompress, it depends on the level of security that was chosen during the compression process.
 	1. unsecured
