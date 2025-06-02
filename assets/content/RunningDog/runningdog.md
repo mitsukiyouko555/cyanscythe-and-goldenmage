@@ -700,35 +700,3 @@ Da Vinci Resolve Color Grading/Correction Tuts:
 
 #### If you read this far, thanks for reading and I hoped it was helpful and hope you enjoyed it! :D
 
-
-<!--
-
-npm run server
-npm run build
-git add .
-git commit -m "update note"
-git push -u origin
-npm run deploy 
-
--->
-
-
-<!-- 
-
-Reddit Post:
-
-Flair: Tutorial
-
-Title: Running Dog Looping Animation Critique for u/remyisacutie
-
-Hi guys! 
-
-Wrote this guide on how I would approach making a smooth looping animation for u/remyisacutie - but figured I'd share it here in case anyone else is interested in reading it since I went in depth about how I got it to loop as well as some compositing methods.
-
-Full Blogpost Tutorial (in my WIP Blog that I coded): https://mitsukiyouko555.github.io/cyanscythe-and-goldenmage/#/post/running-dog-animation-critique
-
-See the Hi Res Ver on youtube: https://www.youtube.com/watch?v=04N1HEK5PRU
-
-INSERT REDDIT VER OF GIF
-
- -->

@@ -1,5 +1,5 @@
 ---
-title: Character Recognizer - A CNN Model
+title: Character Recognizer - A CNN Model (WIP)
 author: Mitsuki Youko
 date_created: 2025-04-19
 tag: projects
@@ -22,7 +22,7 @@ Since I am very passionate about my [personal project](https://mitsukiyouko555.w
 
 ### 1. Small Dataset
 
-The Cats vs Dogs dataset is HUGE at over 25,000 Images to train on. I draw my ocs pretty inconsistently lol... I mainly draw Maxus and Hydra and don't draw the others as much.
+The Cats vs Dogs dataset is HUGE at over 25,000 Images to train on. I draw my ocs pretty inconsistently (in terms of who I draw more) lol... I mainly draw Maxus and Hydra and don't draw the others as much.
 
 As such, I will have to draw an even amount of art per character.
 
