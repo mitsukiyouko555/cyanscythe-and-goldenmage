@@ -130,8 +130,8 @@ iframe {
 }
 
 .intro-text:hover{
-    width: 15.3em;
-    height: 30.5em;
+    /* width: 15.3em;
+    height: 30.5em; */
     mix-blend-mode: color-dodge;
     /* color: rgb(192, 229, 182); */
     /* background-image: linear-gradient(rgb(119, 174, 149), rgb(68, 95, 90) ,rgb(28, 34, 28)); */
@@ -157,8 +157,9 @@ iframe {
 }
 
 .smlogo:hover{
-    width: 6em;
-    height: 6em;
+    mix-blend-mode:hard-light;
+    /* width: 6em;
+    height: 6em; */
 }
 
 .bloglink {
