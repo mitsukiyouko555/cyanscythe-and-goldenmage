@@ -8,7 +8,7 @@ export default function Header(){
                 <h1 className="blogtitle">Cyanscythe and Goldenmage</h1>
                 <ul className="headerlist">
                     <li><Link to={`/home`}>Home</Link></li>
-                    <li><Link to={`/techwriting`}>How To's</Link></li>
+                    <li><Link to={`/techwriting`}>Technical Writing</Link></li>
                     <li><Link to={`/projects`}>Projects</Link></li>
                     <li><Link to={`/cyandden`}>Cy & Den</Link></li>
                     <li><Link to={`/ethicalhacking`}>Ethical Hacking</Link></li>

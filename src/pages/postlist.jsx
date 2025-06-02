@@ -10,7 +10,7 @@ export default function Postlist(props){
         const dateB = new Date(b.date_created);
         return dateB - dateA;
     });
-
+    
     return(
         <>
             <img className="post-img" src={props.image}/>
@@ -26,7 +26,7 @@ export default function Postlist(props){
                                     to={`/post/${createSlug(post.title)}`}
                                     style={{ textDecoration: 'none' }}
                                 >                                
-                                <div className="post-card">
+                                <div className={`post-card ${post.tag + '-card'}`}>
                                 <h2>{post.title}</h2>
                                 <small> <strong>Date Created:</strong> {post.date_created}</small>
                                 <br/>

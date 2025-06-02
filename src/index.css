@@ -67,7 +67,7 @@ ul{
    display: flex;
 }
 
-.content ul{
+.content-wrapper ul{
     display: block;
 }
 
@@ -81,9 +81,14 @@ ul a:hover{
     color: rgb(59, 255, 154);
 }
 
+iframe { 
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .about-section{
-    display: block;
-    align-items: left;
+    display: flex;
+    flex-direction: column;
 }
 
 .about-section p {
@@ -107,13 +112,13 @@ ul a:hover{
     width: 15em;
     margin: 1.1em;
     align-items: center;
-    background-image: linear-gradient(rgb(100, 148, 126), rgb(59, 76, 73) ,rgb(28, 31, 28));
+    /* background-image: linear-gradient(rgb(100, 148, 126), rgb(59, 76, 73) ,rgb(28, 31, 28)); */
 }
 
 .intro-text h3, .intro-text p {
     display: flex;
     justify-content: center;
-    color: rgb(219, 255, 209);
+    /* color: rgb(219, 255, 209); */
     padding-right: 0.7em;
     padding-left: 0.7em;
 
@@ -127,21 +132,21 @@ ul a:hover{
 .intro-text:hover{
     width: 15.3em;
     height: 30.5em;
-    color: rgb(192, 229, 182);
-    background-image: linear-gradient(rgb(119, 174, 149), rgb(68, 95, 90) ,rgb(28, 34, 28));
+    mix-blend-mode: color-dodge;
+    /* color: rgb(192, 229, 182); */
+    /* background-image: linear-gradient(rgb(119, 174, 149), rgb(68, 95, 90) ,rgb(28, 34, 28)); */
 }
-
+.smlogo-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
 .intro-text-logo{
     width: 75%;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     border: none;
     padding-bottom: 2em;
-}
-
-.smlogo-wrapper{
-    display: flex;
-
 }
 
 .smlogo{
@@ -163,6 +168,7 @@ ul a:hover{
 .post-chunk{
     display: flex;
     flex-wrap: wrap;
+    /* justify-content: center; */
 }
 
 
@@ -183,11 +189,99 @@ ul a:hover{
     color: rgb(17, 58, 67);
     /* background-color: rgb(187, 255, 198); */
     /* background-image: linear-gradient(rgb(164, 253, 169), rgb(28, 207, 123) ,rgb(76, 233, 107)); */
-    background-image: linear-gradient(rgb(180, 248, 183), rgb(136, 242, 168),rgb(81, 238, 196));
+    /* background-image: linear-gradient(rgb(180, 248, 183), rgb(136, 242, 168),rgb(81, 238, 196)); */
 }
 
+.post-card small{
+    mix-blend-mode:multiply
+}
+
+.techwriting{
+    color: rgb(6, 89, 24);
+    background-image: 
+    linear-gradient(rgb(220, 255, 203), rgb(161, 243, 158),rgb(121, 233, 207));
+}
+
+.techwriting-card{
+    color: rgb(6, 89, 24);
+    background-image: 
+    url('/assets/socialmedialogos/personallogo.png'),
+    linear-gradient(rgb(220, 255, 203), rgb(161, 243, 158),rgb(121, 233, 207));
+
+}
+
+.projects{
+    color: rgb(65, 8, 73);
+    background-image: 
+    linear-gradient(rgb(251, 224, 255), rgb(235, 170, 223),rgb(250, 69, 174));
+}
+
+.projects-card{
+    color: rgb(65, 8, 73);
+    background-image: 
+    url('/assets/socialmedialogos/personallogo.png'),
+    linear-gradient(rgb(251, 224, 255), rgb(235, 170, 223),rgb(250, 69, 174));
+}
+
+.cyandden{
+    color: rgb(20, 2, 59);
+    background-image: 
+    linear-gradient(rgb(186, 255, 249), rgb(125, 150, 214),rgb(163, 132, 237));
+}
+
+.cyandden-card{
+    color: rgb(20, 2, 59);
+    background-image: 
+    url('/assets/socialmedialogos/personallogo.png'),
+    linear-gradient(rgb(186, 255, 249), rgb(125, 150, 214),rgb(163, 132, 237));
+
+}
+
+.ethicalhacking{
+    color: rgb(80, 3, 3);
+    background-image: 
+    linear-gradient(rgb(255, 235, 153), rgb(237, 151, 111),rgb(237, 61, 61));
+}
+
+.ethicalhacking-card{
+    color: rgb(80, 3, 3);
+    background-image: 
+    url('/assets/socialmedialogos/personallogo.png'),
+    linear-gradient(rgb(255, 235, 153), rgb(237, 151, 111),rgb(237, 61, 61));
+    /* background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%; */
+}
+
+.scripts{
+    color: rgb(105, 52, 0);
+    background-image: 
+    linear-gradient(#e8ff9e, #ffd675,#f07545);
+}
+
+.scripts-card{
+    color: rgb(105, 52, 0);
+    background-image: 
+    url('/assets/socialmedialogos/personallogo.png'),
+    linear-gradient(#e8ff9e, #ffd675,#f07545);
+}
+
+.misc{
+    color: #5c0202;
+    background-image: 
+    linear-gradient(#fdfad4, #f1b592,#ff7caa);
+} 
+ 
+.misc-card{
+    color: #5c0202;
+    background-image: 
+    url('/assets/socialmedialogos/personallogo.png'),
+    linear-gradient(#fdfad4, #f1b592,#ff7caa);
+} 
+
 .post-card:hover{
-    opacity: 90%;
+    isolation: isolate;
+    mix-blend-mode: hard-light;
 }
 
 .blogpost-itself{
@@ -224,7 +318,11 @@ ul a:hover{
     line-height: 1.5;
 }
 
-.content img{
+iframe {
+    max-width: 100%;
+}
+
+.content-wrapper img{
     max-width: 100%;
     max-height: 40em;
     border: solid;

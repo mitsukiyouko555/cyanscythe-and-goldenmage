@@ -41,9 +41,19 @@ const post = postlist.find(post => createSlug(post.title) === postTitleSlug);
                 </div>
                 <hr width="70%"/>
                 <div className="content-wrapper">
-                    
-                    {post.tag == "cyandden" ? <Markdown className="special-content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}
-                    </Markdown> : <Markdown className="content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}</Markdown>}
+                    {post.tag == "cyandden" ? <Markdown className="special-content cyandden-content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}
+                    </Markdown> 
+                    : post.tag == "techwriting" ? <Markdown className="techwriting-content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}
+                    </Markdown> :
+                    post.tag == "projects" ? <Markdown className="projects-content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}
+                    </Markdown> :
+                    post.tag == "misc" ? <Markdown className="misc-content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}
+                    </Markdown> :
+                    post.tag == "ethicalhacking" ? <Markdown className="ethicalhacking-content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}
+                    </Markdown> :
+                    post.tag == "scripts" ? <Markdown className="scripts-content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}
+                    </Markdown> :
+                    <Markdown className="content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}</Markdown>}
                 </div>
             </div>
         </>
