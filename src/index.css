@@ -130,9 +130,11 @@ iframe {
 }
 
 .intro-text:hover{
+    isolation: isolate;
+    mix-blend-mode: hard-light;
     /* width: 15.3em;
     height: 30.5em; */
-    mix-blend-mode: color-dodge;
+    /* mix-blend-mode: color-dodge; */
     /* color: rgb(192, 229, 182); */
     /* background-image: linear-gradient(rgb(119, 174, 149), rgb(68, 95, 90) ,rgb(28, 34, 28)); */
 }
@@ -204,10 +206,10 @@ iframe {
 }
 
 .techwriting-card{
-    color: rgb(6, 89, 24);
+    color: rgb(2, 35, 10);
     background-image: 
-    url('/assets/socialmedialogos/personallogo.png'),
-    linear-gradient(rgb(220, 255, 203), rgb(161, 243, 158),rgb(121, 233, 207));
+    url('/assets/socialmedialogos/techwriting-logo-light.png'),
+    linear-gradient(rgb(220, 255, 203), rgb(117, 207, 114),rgb(108, 221, 195));
 
 }
 
@@ -276,7 +278,7 @@ iframe {
 .misc-card{
     color: #5c0202;
     background-image: 
-    url('/assets/socialmedialogos/personallogo.png'),
+    url('/assets/socialmedialogos/misc-logo.png'),
     linear-gradient(#fdfad4, #f1b592,#ff7caa);
 } 
 

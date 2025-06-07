@@ -18,7 +18,7 @@ export default function Home(){
                     <section className="intro-text techwriting">
                         <h3>Technical Writing</h3>
                         <p>These are mostly technical writing blogs where I write tutorials about how to do certain technical things. They are basically "How-to" articles.</p>
-                        <img className="intro-text-logo" src="assets/socialmedialogos/personallogo.png"/>
+                        <img className="intro-text-logo" src="assets/socialmedialogos/techwriting-logo-light.png"/>
                     </section>
             </Link>
 
@@ -58,7 +58,7 @@ export default function Home(){
                     <section className="intro-text misc">
                         <h3>Misc</h3>
                         <p>This category holds any blogposts that do not fall into any of the above categories... just Miscellaneous items This can include blogposts about my other hobbies, such as art, animation, music making, etc.</p>
-                        <img className="intro-text-logo" src="assets/socialmedialogos/personallogo.png"/>
+                        <img className="intro-text-logo" src="assets/socialmedialogos/misc-logo.png"/>
                     </section>
                 </Link>
 
