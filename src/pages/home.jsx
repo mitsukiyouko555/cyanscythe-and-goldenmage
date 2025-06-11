@@ -26,7 +26,7 @@ export default function Home(){
                     <section className="intro-text projects">
                         <h3>Projects</h3>
                         <p>This is similar to the Technical Writing category but each post revolves around how to do certain projects from beginning to end rather than just tips here and there.</p>
-                        <img className="intro-text-logo" src="assets/socialmedialogos/personallogo.png"/>
+                        <img className="intro-text-logo" src="assets/socialmedialogos/projectLogo-flipped.png"/>
                     </section>
             </Link>
 

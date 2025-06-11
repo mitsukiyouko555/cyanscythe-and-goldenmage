@@ -220,9 +220,9 @@ iframe {
 }
 
 .projects-card{
-    color: rgb(65, 8, 73);
+    color: rgb(59, 19, 64);
     background-image: 
-    url('/assets/socialmedialogos/personallogo.png'),
+    url('/assets/socialmedialogos/projectLogo-lighter.png'),
     linear-gradient(rgb(251, 224, 255), rgb(235, 170, 223),rgb(250, 69, 174));
 }
 
