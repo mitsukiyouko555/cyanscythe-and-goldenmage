@@ -50,7 +50,7 @@ export default function Home(){
                     <section className="intro-text scripts">
                         <h3>Scripts</h3>
                         <p>This category breaks down the scripts that I wrote line by line along with in depth explanations of how and why it works.</p>
-                        <img className="intro-text-logo" src="assets/socialmedialogos/personallogo.png"/>
+                        <img className="intro-text-logo" src="assets/socialmedialogos/script-logo-peachy-darker-bigger.png"/>
                     </section>
                 </Link>
 
