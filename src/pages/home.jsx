@@ -34,7 +34,7 @@ export default function Home(){
                     <section className="intro-text cyandden">
                         <h3>Cy & Den</h3>
                         <p>This category is sometimes depicted in short comics, or at times, is written like technical writing but with interjections from Cy and Den throughout and shown from both an Red and Blue Team perspective. </p>
-                        <img className="intro-text-logo" src="assets/socialmedialogos/personallogo.png"/>
+                        <img className="intro-text-logo" src="assets/socialmedialogos/cyandden-logo.png"/>
                     </section>
                 </Link>
 
