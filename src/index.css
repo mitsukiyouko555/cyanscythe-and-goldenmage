@@ -131,7 +131,7 @@ iframe {
 
 .intro-text:hover{
     isolation: isolate;
-    mix-blend-mode: hard-light;
+    mix-blend-mode:hard-light
     /* width: 15.3em;
     height: 30.5em; */
     /* mix-blend-mode: color-dodge; */
@@ -249,7 +249,7 @@ iframe {
 .ethicalhacking-card{
     color: rgb(80, 3, 3);
     background-image: 
-    url('/assets/socialmedialogos/personallogo.png'),
+    url('/assets/socialmedialogos/ethical-hacking-logo.png'),
     linear-gradient(rgb(255, 235, 153), rgb(237, 151, 111),rgb(237, 61, 61));
     /* background-position: center;
     background-repeat: no-repeat;
@@ -278,7 +278,7 @@ iframe {
 .misc-card{
     color: #5c0202;
     background-image: 
-    url('/assets/socialmedialogos/misc-logo.png'),
+    url('/assets/socialmedialogos/misc-logo-thicc-line.png'),
     linear-gradient(#fdfad4, #f1b592,#ff7caa);
 } 
 

@@ -42,7 +42,7 @@ export default function Home(){
                     <section className="intro-text ethicalhacking">
                         <h3>Ethical Hacking</h3>
                         <p>This category is technical writing as well, but specifically around how to hack (ethically of course). There will also be some walkthroughs on ethical hacking challenges.</p>
-                        <img className="intro-text-logo" src="assets/socialmedialogos/personallogo.png"/>                
+                        <img className="intro-text-logo" src="assets/socialmedialogos/ethical-hacking-logo.png"/>                
                     </section>
                 </Link>
                     
@@ -58,7 +58,7 @@ export default function Home(){
                     <section className="intro-text misc">
                         <h3>Misc</h3>
                         <p>This category holds any blogposts that do not fall into any of the above categories... just Miscellaneous items This can include blogposts about my other hobbies, such as art, animation, music making, etc.</p>
-                        <img className="intro-text-logo" src="assets/socialmedialogos/misc-logo.png"/>
+                        <img className="intro-text-logo" src="assets/socialmedialogos/misc-logo-thicc-line.png"/>
                     </section>
                 </Link>
 
