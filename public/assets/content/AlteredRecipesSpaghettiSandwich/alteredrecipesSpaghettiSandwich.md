@@ -48,7 +48,7 @@ Serving Size: 1
 7. Once the spaghetti is done, use the tongs to take the spaghetti out and gently shake up and down to drip off any excess water and put the spaghetti into the pan.
 8. Mix the spaghetti with the vegetables and it for a bit til the sauce soaks in - add more spices if needed.
 9. Turn off the heat and use the tongs to place the spaghetti and vegetables onto the bread.
-10. Enjoy! eat it like a subway sandwich or fold the bread in half or really, however you feel like eating it.
+10. Enjoy! Eat it like a subway sandwich or fold the bread in half or really, however you feel like eating it.
 
 
 ### Afterword
