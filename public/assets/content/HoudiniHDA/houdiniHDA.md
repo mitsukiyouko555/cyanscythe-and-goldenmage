@@ -1,7 +1,7 @@
 ---
-title: How To Create a Houdini Digital Asset (HDA) with Python Modules
+title: How To Create a Houdini HDAs
 author: Mitsuki Youko
-date_created: YYYY-MM-DD
+date_created: 2025-10-03
 tag: techwriting
 blurb: Learn how to create your own Houdini Digital Assets that integrate python modules from scratch!
 ---
