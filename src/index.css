@@ -37,7 +37,7 @@ body{
     font-family: "Avenir";
     color: rgb(229, 255, 192);
     /* background-image: linear-gradient(rgb(184, 255, 181),rgb(128, 241, 185)); */
-    background-image: linear-gradient(rgb(28, 33, 33), rgb(59, 76, 73) ,rgb(77, 126, 110));
+    background-image: linear-gradient(rgb(28, 30, 33), rgb(59, 72, 76) ,rgb(77, 126, 110));
 }
 
 footer{
