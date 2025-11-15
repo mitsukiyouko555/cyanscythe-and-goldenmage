@@ -12,9 +12,9 @@ This line here is too thick but I don't want to redraw it:
 
 ![alt text](assets/content/HowToAdjustLineWidthonRasterLayerCSP/img/image-1.png)
 
-"Why not use a vector layer?" you might ask. Well this wiki is for people who like to draw on raster Layers - but if you did use vector layers, you can just adjust it in your vector settings.
+"Why not use a vector layer?" you might ask. Well, this wiki is for people who like to draw on raster Layers - but if you did use vector layers, you can just adjust it in your vector settings.
 
-This is how you would fix that for the raster Layers with Adjust Line Width:
+### Steps:
 
 1. Ensure the lineart you want to change the width for is on its own layer. If it isn't on its own layer, try to use the lasso tool and the cut to new layer tool to put it on its own layer to the best of your abilities.
 
@@ -30,7 +30,7 @@ Here, the line I want to adjust is already on its own layer:
 
 3. Type in the desired size to ADJUST BY for your line and click Ok. Undo or adjust the sizing as needed and you've got yourself a nice resized line without having to redraw it!
 
-Here, you can see the preview that this narrows the line by 2px:
+Here, you can see in the preview that this narrows the line by 2px:
 
 ![alt text](assets/content/HowToAdjustLineWidthonRasterLayerCSP/img/image-4.png)
 
