@@ -1,5 +1,5 @@
 ---
-title: How to Make an Art Book
+title: How to Make an Art Book (WIP)
 author: Mitsuki Youko
 date_created: 2025-12-09
 tag: projects
