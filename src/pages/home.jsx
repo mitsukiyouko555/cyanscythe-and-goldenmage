@@ -64,7 +64,7 @@ export default function Home(){
 
             </div>
             <hr/>
-            <div classname="about-wrapper">
+            <div className="about-wrapper">
                 <div className="about-section">
                 <h2>About</h2>
                 
@@ -73,9 +73,10 @@ export default function Home(){
                 <p>Writing and art are my main hobbies, ethical hacking is my second, so I figured... why not combine em?</p>
                 <p>All content (including art) on this blog is created by me.</p> 
                 <p>(No AI art or content - with the exception of using Gemini to help me when I ocassionally got stuck coding this website.)</p>
-                <Link to={`/post/introducing-cy-and-den`} className="intro-link">
-                <p>Wanna learn who/what Cyanscythe (Cy) and Goldenmage (Den) are? Click here!</p>
-                </Link>
+                
+                <p>Wanna learn who/what Cyanscythe (Cy) and Goldenmage (Den) are? <Link to={`/post/introducing-cy-and-den`} className="special-link">
+                Click here!</Link></p>
+                
                 <p>If you like my blog, check out some of my other creations here:</p>
                 </div>
             </div>

@@ -8,6 +8,17 @@
 }
 
 @font-face{
+    font-family: "MPLUSLIGHT";
+    src:url(/assets/fonts/MPLUSRounded1c-Light.ttf)
+    /* src:url(assets/fonts/MPLUSRounded1c-Medium.ttf) */
+}
+
+@font-face{
+    font-family: "MPLUSMID";
+    /* src:url(/assets/fonts/MPLUSRounded1c-Light.ttf) */
+    src:url(assets/fonts/MPLUSRounded1c-Medium.ttf)
+}
+@font-face{
     font-family: "Yeysk";
     src:url(/assets/fonts/YeyskRegular-JzaM.otf)
 }
@@ -38,6 +49,11 @@ body{
     color: rgb(229, 255, 192);
     /* background-image: linear-gradient(rgb(184, 255, 181),rgb(128, 241, 185)); */
     background-image: linear-gradient(rgb(28, 30, 33), rgb(59, 72, 76) ,rgb(77, 126, 110));
+}
+
+.content-wrapper :is(h1, h2, h3, h4, h5, h6) {
+    font-family: "MPLUSMID";
+    font-weight: bold;
 }
 
 footer{
@@ -71,10 +87,48 @@ ul{
     display: block;
 }
 
-ul a, .intro-link, a{
+.content-wrapper pre{
+    background-color: #d1ffc4;
+    padding: 15px;
+    border-radius: 8px;
+    color: rgb(20, 36, 28);
+    text-wrap: inherit;
+    /* overflow-x: auto; */
+}
+
+.callout-note {
+    border: solid 2px;
+    border-color: #0b2e00;
+    background-color: rgb(195, 255, 199);
+    padding: 15px;
+    border-radius: 8px;
+    color: rgb(18, 24, 28);
+    text-wrap: inherit;
+    & strong {
+        display: block;
+        font-size: 20px;
+    }
+}
+
+.callout-warning {
+    border: solid 2px;
+    border-color: #5c0202;
+    background-color: rgb(255, 196, 196);
+    padding: 15px;
+    border-radius: 8px;
+    color: rgb(67, 0, 0);
+    text-wrap: inherit;
+    & strong {
+        display: block;
+        font-size: 20px;
+    }
+}
+
+ul a, .intro-link{
     text-decoration: none;
     color: rgb(170, 254, 184);
 }
+
 
 ul a:hover{
     text-decoration: none;
@@ -226,13 +280,13 @@ iframe {
     linear-gradient(rgb(251, 224, 255), rgb(235, 170, 223),rgb(250, 69, 174));
 }
 
-.cyandden{
+.cyandden, .cyanddenmanga-card{
     color: rgb(20, 2, 59);
     background-image: 
     linear-gradient(rgb(186, 255, 249), rgb(125, 150, 214),rgb(163, 132, 237));
 }
 
-.cyandden-card{
+.cyandden-card, .cyanddenmanga-card{
     color: rgb(20, 2, 59);
     background-image: 
     url('/assets/socialmedialogos/cyandden-logo.png'),
@@ -309,11 +363,13 @@ iframe {
 .title-content{
     padding-left: 15%;
     padding-right: 15%;
+    font-family: "MPLUSLIGHT";
 }
 
 .content-wrapper{
     padding-left: 15%;
     padding-right: 15%;
+    font-family: "MPLUSLIGHT";
 }
 
 .content {
@@ -332,7 +388,7 @@ iframe {
     border-width: thin;
 }
 
-.content a{
+a, .special-link{
     text-decoration: underline;
-    color: rgb(38, 255, 0);
+    color: rgb(0, 255, 229);
 }

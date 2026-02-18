@@ -41,7 +41,7 @@ const post = postlist.find(post => createSlug(post.title) === postTitleSlug);
                 </div>
                 <hr width="70%"/>
                 <div className="content-wrapper">
-                    {post.tag == "cyandden" ? <Markdown className="special-content cyandden-content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}
+                    {post.tag == "cyanddenmanga" ? <Markdown className="special-content cyandden-content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}
                     </Markdown> 
                     : post.tag == "techwriting" ? <Markdown className="techwriting-content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}
                     </Markdown> :
@@ -52,6 +52,8 @@ const post = postlist.find(post => createSlug(post.title) === postTitleSlug);
                     post.tag == "ethicalhacking" ? <Markdown className="ethicalhacking-content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}
                     </Markdown> :
                     post.tag == "scripts" ? <Markdown className="scripts-content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}
+                    </Markdown> :
+                    post.tag == "cyandden" ? <Markdown className="cyandden-content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}
                     </Markdown> :
                     <Markdown className="content" rehypePlugins={[rehypeRaw]} components={markdownComponents}>{post.content}</Markdown>}
                 </div>

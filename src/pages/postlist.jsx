@@ -19,7 +19,8 @@ export default function Postlist(props){
             {sortedPosts.length && 
                 sortedPosts.map((post, i) => {
                     const tags = post.tag.split(',').map(tag => tag.trim())
-                    if (tags.includes(props.tag) || (props.flag == "all")){
+                    const cyanddenCategory = props.tag === "cyandden" && (tags.includes("cyandden") || tags.includes("cyanddenmanga"))
+                    if (cyanddenCategory || tags.includes(props.tag) || (props.flag == "all")){
                         return(
                             <li key={post.id} className="bloglink">
                                 <Link
