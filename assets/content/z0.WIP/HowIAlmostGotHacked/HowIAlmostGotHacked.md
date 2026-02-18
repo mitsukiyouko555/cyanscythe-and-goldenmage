@@ -6,4 +6,5 @@ tag: cyandden
 blurb: A cautionary tale about how, despite knowing the signs, I still ALMOST got hacked.
 ---
 
-# Infographic goes here... (WIP)
+
+# WIP - Insert Infographic Here
