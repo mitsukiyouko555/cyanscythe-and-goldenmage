@@ -8,7 +8,7 @@ export default function Home(){
             <img className="post-img" src="assets/banners/about.jpg"/>
             
 
-            <h1>Welcome! (This Blogsite is still under construction!)</h1>
+            <h1>Welcome to the ever evolving Technical Writing Blog of Mitsuki Youko! </h1>
             <hr/>
             <h2>The Cyanscythe and Goldenmage Blog consists of 6 categories:</h2>
 
@@ -42,7 +42,7 @@ export default function Home(){
                     <section className="intro-text ethicalhacking">
                         <h3>Ethical Hacking</h3>
                         <p>This category is technical writing as well, but specifically around how to hack (ethically of course). There will also be some walkthroughs on ethical hacking challenges.</p>
-                        <img className="intro-text-logo" src="assets/socialmedialogos/ethical-hacking-logo.png"/>                
+                        <img className="intro-text-logo" src="assets/socialmedialogos/ethical-hacking-logo.png"/>
                     </section>
                 </Link>
                     
@@ -57,7 +57,7 @@ export default function Home(){
                 <Link to={`/misc`} className="intro-link ">
                     <section className="intro-text misc">
                         <h3>Misc</h3>
-                        <p>This category holds any blogposts that do not fall into any of the above categories... just Miscellaneous items This can include blogposts about my other hobbies, such as art, animation, music making, etc.</p>
+                        <p>This category holds any blogposts that do not fall into any of the above categories... just Miscellaneous items. This can include blogposts about my other hobbies, such as art, animation, music making, etc.</p>
                         <img className="intro-text-logo" src="assets/socialmedialogos/misc-logo-thicc-line.png"/>
                     </section>
                 </Link>

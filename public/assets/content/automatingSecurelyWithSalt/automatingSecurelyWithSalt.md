@@ -102,11 +102,17 @@ Once that's done, on the salt-minion, run these 3 commands:
 - systemctl restart salt-minion
 - systemctl status salt-minion
 
+What these commands do is enable the service so if the server reboots, then the service will auto start on its own rather than needing you to start it manually. 
+
+Systemctl restart, as the name implies, restarts the service. The reason we do this after adding the saltmaster's ip address to the minion's /etc/hosts is because on some linux distros, it automatically starts the salt-minion service after the installation. So to get it to see the new configs so that it can find the salt master, you would restart the service so that when it comes back up, it sees the new configurations.
+
 IF you get an error on the salt minion, check the following:
 
 1. Is the IP you put in /etc/hosts correct? If not, correct it, then run 'systemctl restart salt-minion', and then run "systemctl status salt-minion" and see if it is up.
 2. IF the IP IS correct, then check to make sure that the salt-minion is on the same network as the salt master. If they are on different networks, they won't be able to talk to each other.
-3. Are the salt master and salt minion on the same salt VERSION? (You can check this by running "salt-master -V" or "salt-minion -V"). If they are NOT on the same version, you will need to uninstall the salt minion, and reinstall the version of the salt minion that matches the salt master.
+3. Are the salt master and salt minion on the same salt VERSION? (You can check this by running "salt-master -V" or "salt-minion -V"). If they are NOT on the same version, you will need to uninstall the salt minion, and reinstall the version of the salt minion that matches the salt master. 
+
+Say, for example, the latest version is salt 3008, but your salt master is on 3007, and your salt minion keeps pulling the 3008 package because it sees that as the latest one, you will need to pin 3007 using the Salt Installation instructions for your respective OS, and pin it before installing.
 
 Example:
 
@@ -116,7 +122,7 @@ Here, the salt minion is installed but it's showing as inactive (dead).
 
 I checked my /etc/hosts and realized that I had a typo in the ip address for the "salt" entry.
 
-After I fixed that, I restarted the salt-minion service.. Still, Nothing..
+After I fixed that, I restarted the salt-minion service.. Still, nothing..
 
 Then I checked the network my Kali VM was on compared to the Saltmaster and realized they were on two different networks.
 
@@ -294,11 +300,82 @@ If you ran it once, and want to run it again, it will turn from blue to green if
 
 To show you what you can do with file management in Salt, I'll give you another example.
 
-\<include the orange.sls sample.>
+Say I want to copy a file that has certain configurations.. In this case, I want to put a file in the minion's root directory that says "I'm an Orange" when the file is read. This may seem like a random example, and it is but trust me, this will lead to the concepts for the next section.
 
+So to do this, I need a few things:
+1. A file called orange.txt with the text "I'm an Orange" that sits somewhere within /srv/salt or one of its subdirectory on the saltmaster
+2. An applesAndOranges.sls (the naming will be explained later but basically you need a .sls to tell salt which file to pick up on the saltmaster and where to put it on the salt-minion)
+3. I'd then need to include the applesAndOranges.sls into top.sls
+
+So first, I created a directory, which for presentation purposes and to avoid confusion, I've called "directory", alongside top.sls.
+
+![directory folder](assets/content/automatingSecurelyWithSalt/img/15.png)
+
+Within that directory, I created the applesAndOranges.sls file, along with a "files" directory.
+
+In a production environment, many times, sls's that need certain files have the files within a sub directory next to that .sls, albeit with better and more specific naming conventions than just "files".
+
+![directory folder](assets/content/automatingSecurelyWithSalt/img/16.png)
+
+Within the files directory, I have an oranges.txt file:
+
+![oranges.txt](assets/content/automatingSecurelyWithSalt/img/17.png)
+
+Within the applesAndOranges.sls file, I have the following:
+
+![applesAndOranges.sls](assets/content/automatingSecurelyWithSalt/img/18.png)
+
+Let's break this down line by line:
+
+1. copyOranges is the name of this set of commands. You can name this whatever you want but it's better if it is a descriptive name.
+2. file.managed is the actual command. It manages the file and ensures the Minion has the file set up correctly based on the parameters given below.
+3. The name you put is the path you want the file to show up in on the salt minion.
+4. The source = where the file is on the saltmaster. In this case, oranges.txt file is within the "files" folder of the "directory" folder in the salt root dir. salt:// means the root directory of salt based on the saltmaster configurations. By default, that is /srv/salt. So by typing salt:// you are effectively saying /srv/salt.
+5. User - the owner of the file
+6. Group - the group that owns the file
+7. The permissions for the file. A permission of '0644' means that the owner can read and write while the group and other users can ONLY read the file.
+
+NOTE: See how file.managed is indented by TWO spaces? And then, see how the sub-options for file.managed is indented by 4 SPACES? 
+
+It is critical that you use spaces for indentation and not tabs as salt will definitely complain and throw an error about tabs being used in lieu of spaces.
+
+Here is a visual for those who are more visually inclined:
+
+![applesAndOranges.sls](assets/content/automatingSecurelyWithSalt/img/19.png)
+
+Now that the applesAndOranges.sls file has been created, let's test it by running it on ONE minion with this command: "salt '\<minion>' state.sls applesAndOranges"
+
+Note that here, we don't include .sls in the applesAndOranges name because we are already calling state.sls.
+
+If it is successful, you'll see something like this:
+
+![applesAndOranges.sls](assets/content/automatingSecurelyWithSalt/img/20.png)
+
+If it fails, it could be because you have a syntax error (things aren't indented properly using spaces, no tabs), or it can't find the file so your source path may be wrong, or there could be some typos in the .sls. 
+
+Syntax troubleshooting could be its own wiki, so to remain focused on Basic Salt, I'll refrain from going into detail about that in this wiki.
+
+Assuming it was successful, you can then go to top.sls and add applesAndOranges.sls in there so that when you highstate it, applesAndOranges.sls will be run for sure, among all your other .sls files that you include.
+
+Since you know for sure that this works, you can add it to highstate like so:
+
+![adding applesAndOranges.sls to highstate](assets/content/automatingSecurelyWithSalt/img/21.png)
+
+You can then run highstate on one minion again to see if everything runs properly, and if so, you're good to go!
+
+Moving on, let's talk about how you can use Grains and Jinja to target systems.
 
 ---
 ### Targeting Systems with Grains and Jinja
+
+First, let's go through some definitions:
+
+- Grains - These contain info about a device like OS, Kernel, and a bunch of other stuff like that. This is useful if, say, you want to target only certain OS but not others. However, that's not all. You can set custom grains and target those as well.
+
+- Jinja - Syntax for writing targeted code - usually used with grains - and most popularly used with if/else statements. 
+Example: If X os, install package A, else-if Y os install Package B, else install Package C.
+
+Note that you can use grains and jinja targeting in top.sls like maybe some devices will need some .sls but not others, depending on your setup.
 
 (Introduce the apple.sls - say if you want to not just have all the machines be oranges, but some be oranges and some be apples based on their distro type, here's what you'd do)
 (note that this is a practical example because different distros have different configurations for say.. .ssh or .bashrc or diff configs for diff software. Such setup would come into use in these scenarios.)
@@ -307,21 +384,48 @@ To show you what you can do with file management in Salt, I'll give you another 
 
 Linux distros, for example, comes in different flavors such as Debian, RHEL (Red Hat Linux), etc... where packages and commands are likely to be different. Then of course, you have your Windows vs your Macs, etc. All these systems get packages installed or configurations set in different ways, therefore if you have a wide array of OS types in your fleet of salt minions, utilizing grains and jinja is a must.
 
-For example, take the Freeipa package (Freeipa is an Authentication software)... the Debian Version of that packate is called "freeipa-client", while on RHEL, it is called "ipa-client" - so here's where Jinja is useful.
+For example, take the Freeipa package (Freeipa is an Authentication software)... the Debian Version of that package is called "freeipa-client", while on RHEL, it is called "ipa-client" - so here's where Jinja is useful.
 
 So if you were to have a sls that installs the package 'freeipa-client', it would run on all Debian minions but fail on a RHEL Minions.
+
+Here's an example of a syntax error:
+
+![alt text](syntaxError.png)
 
 ---
 ### Adding User to Minion with GPG Encrypted Password in Pillar
 
+(introduce the concept of pillars. What is a pillar?)
+
 (make a note about making the /srv/pillar directory)
 (also note how pillars also have their own top.sls which is different from /srv/salt's top.sls but functions similarly with respect to its own surrounding .sls's in the /srv/pillar directory.)
-(make a note about GPG1 vs GPG2 in that GPG2 won't work.)
+
+Before we begin, run "gpg --version" and ensure that it is on version 1 like so (this will save you HOURS of troubleshooting!):
+
+![alt text](gpgVersion.png)
+
+This is CRITICAL because, as pointed out in Claus Conrad's ["Using the GPG renderer to protect Salt pillar items" Blogpost](https://www.clausconrad.com/blog/using-the-gpg-renderer-to-protect-salt-pillar-items/), GPG Version 2 does NOT work for use with Salt Pillars!
+
+I tested this myself - as while I was working on the lab for this wiki, Salt kept throwing me errors about not being able to decrypt the pillar. When I found Claus's blogpost, I tried uninstalling GPG2 and installed GPG1, then and followed the same steps I used for gpg2 again, it finally worked.
+
+I'll walk you through all the steps below.
+
+Rough overview of steps:
+1. Remove gpg2 install gnupg1
+2. symlink /gpg1 to gpg
+3. create the /etc/salt/gpgkeys directory and change the owner to salt and set the permissions properly. too permissive = gpg will complain.
+4. generate the gpgkeys - this is the key that will be used to encrypt stuff.
+5. run the command to encrypt the password AND >> it into the .sls file so that you can simply re-space it - especially if your saltmaster is a device where you cannot copy and paste.
+6. Write the credentials.sls
+7. create the top.sls for /srv/pillar and add credentials.sls to it. You cannot use the pillar if its not in /srv/pillar's top.sls as it won't be able to find it
+8. Use the pillar in one of your /srv/salt's .sls file
+9. Include the srv/salt's pillar into srv/salt's top.sls
+
 
 
 ---
 ## Outro
 
-As you can see, what we are doing here is just barely the tip of the iceberg when it comes to salt!
+As you can see, what we are doing here is just barely the tip of the iceberg when it comes to salt! 
 
-I highly recommend that you read the official documentation over at [https://docs.saltproject.io/en/3007/contents.html](https://docs.saltproject.io/en/3007/contents.html) to learn more about what salt can do.
+Due to the many ways you can configure salt, the world is your oyster - so I highly recommend that you read the official documentation over at [https://docs.saltproject.io/en/3007/contents.html](https://docs.saltproject.io/en/3007/contents.html) to learn more about what salt can do.
