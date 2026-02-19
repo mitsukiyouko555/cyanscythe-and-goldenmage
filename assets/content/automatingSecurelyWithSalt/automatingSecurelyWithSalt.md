@@ -102,11 +102,17 @@ Once that's done, on the salt-minion, run these 3 commands:
 - systemctl restart salt-minion
 - systemctl status salt-minion
 
+What these commands do is enable the service so if the server reboots, then the service will auto start on its own rather than needing you to start it manually. 
+
+Systemctl restart, as the name implies, restarts the service. The reason we do this after adding the saltmaster's ip address to the minion's /etc/hosts is because on some linux distros, it automatically starts the salt-minion service after the installation. So to get it to see the new configs so that it can find the salt master, you would restart the service so that when it comes back up, it sees the new configurations.
+
 IF you get an error on the salt minion, check the following:
 
 1. Is the IP you put in /etc/hosts correct? If not, correct it, then run 'systemctl restart salt-minion', and then run "systemctl status salt-minion" and see if it is up.
 2. IF the IP IS correct, then check to make sure that the salt-minion is on the same network as the salt master. If they are on different networks, they won't be able to talk to each other.
-3. Are the salt master and salt minion on the same salt VERSION? (You can check this by running "salt-master -V" or "salt-minion -V"). If they are NOT on the same version, you will need to uninstall the salt minion, and reinstall the version of the salt minion that matches the salt master.
+3. Are the salt master and salt minion on the same salt VERSION? (You can check this by running "salt-master -V" or "salt-minion -V"). If they are NOT on the same version, you will need to uninstall the salt minion, and reinstall the version of the salt minion that matches the salt master. 
+
+Say, for example, the latest version is salt 3008, but your salt master is on 3007, and your salt minion keeps pulling the 3008 package because it sees that as the latest one, you will need to pin 3007 using the Salt Installation instructions for your respective OS, and pin it before installing.
 
 Example:
 
@@ -116,7 +122,7 @@ Here, the salt minion is installed but it's showing as inactive (dead).
 
 I checked my /etc/hosts and realized that I had a typo in the ip address for the "salt" entry.
 
-After I fixed that, I restarted the salt-minion service.. Still, Nothing..
+After I fixed that, I restarted the salt-minion service.. Still, nothing..
 
 Then I checked the network my Kali VM was on compared to the Saltmaster and realized they were on two different networks.
 
@@ -294,8 +300,34 @@ If you ran it once, and want to run it again, it will turn from blue to green if
 
 To show you what you can do with file management in Salt, I'll give you another example.
 
-\<include the orange.sls sample.>
+Say I want to copy a file that has certain configurations.. In this case, I want to put a file in the minion's root directory that says "I'm an Orange" when the file is read. This may seem like a random example, and it is but trust me, this will lead to the concepts for the next section.
 
+So to do this, I need a few things:
+1. A file called orange.txt with the text "I'm an Orange" that sits somewhere within /srv/salt or one of its subdirectory on the saltmaster
+2. An applesAndOranges.sls (the naming will be explained later but basically you need a .sls to tell salt which file to pick up on the saltmaster and where to put it on the salt-minion)
+3. I'd then need to include the applesAndOranges.sls into top.sls
+
+So first, I created a directory, which for presentation purposes and to avoid confusion, I've called "directory", alongside top.sls.
+
+![directory folder](assets/content/automatingSecurelyWithSalt/img/15.png)
+
+Within that directory, I created the applesAndOranges.sls file, along with a "files" directory.
+
+In a production environment, many times, sls's that need certain files have the files within a sub directory next to that .sls, albeit with better and more specific naming conventions than just "files".
+
+![directory folder](assets/content/automatingSecurelyWithSalt/img/16.png)
+
+Within the files directory, I have an oranges.txt file:
+
+![oranges.txt](assets/content/automatingSecurelyWithSalt/img/17.png)
+
+Within the applesAndOranges.sls file, I have the following:
+
+![applesAndOranges.sls](assets/content/automatingSecurelyWithSalt/img/18.png)
+
+Let's break this down line by line.
+
+![applesAndOranges.sls](assets/content/automatingSecurelyWithSalt/img/19.png)
 
 ---
 ### Targeting Systems with Grains and Jinja
