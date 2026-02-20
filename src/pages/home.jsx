@@ -8,7 +8,7 @@ export default function Home(){
             <img className="post-img" src="assets/banners/about.jpg"/>
             
 
-            <h1>Welcome to the ever evolving Technical Writing Blog of Mitsuki Youko! </h1>
+            <h1>Welcome to the ever-evolving Technical Writing Blog of Mitsuki Youko! </h1>
             <hr/>
             <h2>The Cyanscythe and Goldenmage Blog consists of 6 categories:</h2>
 
