@@ -2,7 +2,7 @@
 title: Automating Securely with Salt
 author: Mitsuki Youko
 date_created: 2026-02-04
-tag: cyandden
+tag: techwriting
 blurb: A starter guide on automating with SaltStack and securely storing passwords through the use of GPG encrypted secrets within Salt Pillars.
 ---
 
@@ -35,7 +35,6 @@ Navigate to [https://docs.saltproject.io/salt/install-guide/en/latest/](https://
 
 My saltmaster is an Ubuntu 2404 VM server, so I will be following these [instructions](https://docs.saltproject.io/salt/install-guide/en/latest/topics/install-by-operating-system/linux-deb.html):
 
-##### ------------------------------------------------------------------------------
 
 ```
 # Ensure keyrings dir exists
@@ -53,7 +52,6 @@ apt update
 # Installs Salt Master
 apt install salt-master
 ```
-##### ------------------------------------------------------------------------------
 
 Once done, run "systemctl enable salt-master" to ensure that the service automatically comes back up even after a reboot, then run "systemctl status salt-master" to ensure it is up and running. If it is not running, run "systemctl start salt-master" to start it up.
 
@@ -73,7 +71,7 @@ Salt Minions need 2 things to work properly..
 
 2. It needs to know where the saltmaster is (and what it's called if its under a different name). This can be added to /etc/hosts
 
-In a production environment, what I have seen is that everything the salt minion needs is configured via PXE boot so that once a PC as been imaged via PXE boot, it will automatically be able to connect to the salt master - after which you can highstate a pc to your desired state.
+In a some production environments, everything the salt minion needs is configured via PXE boot so that once a PC as been imaged via PXE boot, it will automatically be able to connect to the salt master - after which you can highstate a pc to your desired state.
 
 In this lab environment, however, as I don't have PXE boot set up, I'll be doing this manually.
 
@@ -155,6 +153,10 @@ Here, "*" refers to "all" minions. If you want to target only one minion, you ca
 If you get a response, that means it is good to go - and if you get a "minion did not return. [Not Connected]", that means that either the minion is offline or it is not recieving pings OR it could be that there is a mismatch between the salt minion and master versions thus leading them to not be able to talk to each other.
 
 ![salt ping](assets/content/automatingSecurelyWithSalt/img/7.png)
+
+Sometimes, as you work with salt, a minion could have its salt-minon service up but not be returning responses to the saltmaster. In that case, using test.ping can give it a "kick" so to speak, and get it talking to the saltmaster again.
+
+![salt ping kick](assets/content/automatingSecurelyWithSalt/img/7-1.png)
 
 ---
 ## Basic Salt Usage
@@ -300,28 +302,28 @@ If you ran it once, and want to run it again, it will turn from blue to green if
 
 To show you what you can do with file management in Salt, I'll give you another example.
 
-Say I want to copy a file that has certain configurations.. In this case, I want to put a file in the minion's root directory that says "I'm an Orange" when the file is read. This may seem like a random example, and it is but trust me, this will lead to the concepts for the next section.
+Say you want to copy a file that has certain configurations.. In this simple example, let's say want to put a file in the minion's root directory that says "I'm an Orange" when the file is read. 
 
-So to do this, I need a few things:
+So to do this, you need a few things:
 1. A file called orange.txt with the text "I'm an Orange" that sits somewhere within /srv/salt or one of its subdirectory on the saltmaster
 2. An applesAndOranges.sls (the naming will be explained later but basically you need a .sls to tell salt which file to pick up on the saltmaster and where to put it on the salt-minion)
 3. I'd then need to include the applesAndOranges.sls into top.sls
 
-So first, I created a directory, which for presentation purposes and to avoid confusion, I've called "directory", alongside top.sls.
+First, create a directory, alongside top.sls. In this example, for simplification purposes, it is called "directory".
 
 ![directory folder](assets/content/automatingSecurelyWithSalt/img/15.png)
 
-Within that directory, I created the applesAndOranges.sls file, along with a "files" directory.
+The, create the applesAndOranges.sls file, along with a "files" directory.
 
 In a production environment, many times, sls's that need certain files have the files within a sub directory next to that .sls, albeit with better and more specific naming conventions than just "files".
 
 ![directory folder](assets/content/automatingSecurelyWithSalt/img/16.png)
 
-Within the files directory, I have an oranges.txt file:
+Within the files directory, create an oranges.txt file:
 
 ![oranges.txt](assets/content/automatingSecurelyWithSalt/img/17.png)
 
-Within the applesAndOranges.sls file, I have the following:
+Within the applesAndOranges.sls file, include the following content:
 
 ![applesAndOranges.sls](assets/content/automatingSecurelyWithSalt/img/18.png)
 
@@ -353,6 +355,10 @@ If it is successful, you'll see something like this:
 
 If it fails, it could be because you have a syntax error (things aren't indented properly using spaces, no tabs), or it can't find the file so your source path may be wrong, or there could be some typos in the .sls. 
 
+Here's an example of a syntax error:
+
+![applesAndOranges.sls](assets/content/automatingSecurelyWithSalt/img/20.5.png)
+
 Syntax troubleshooting could be its own wiki, so to remain focused on Basic Salt, I'll refrain from going into detail about that in this wiki.
 
 Assuming it was successful, you can then go to top.sls and add applesAndOranges.sls in there so that when you highstate it, applesAndOranges.sls will be run for sure, among all your other .sls files that you include.
@@ -375,22 +381,53 @@ First, let's go through some definitions:
 - Jinja - Syntax for writing targeted code - usually used with grains - and most popularly used with if/else statements. 
 Example: If X os, install package A, else-if Y os install Package B, else install Package C.
 
-Note that you can use grains and jinja targeting in top.sls like maybe some devices will need some .sls but not others, depending on your setup.
+Linux distros, for example, comes in different flavor such as Debian, RHEL (Red Hat Linux), etc... where packages and commands are likely to be different. Then of course, you have your Windows vs your Macs, etc. All these systems get packages installed or configurations set in different ways, therefore if you have a wide array of OS types in your fleet of salt minions, utilizing grains and jinja is a must.
 
-(Introduce the apple.sls - say if you want to not just have all the machines be oranges, but some be oranges and some be apples based on their distro type, here's what you'd do)
-(note that this is a practical example because different distros have different configurations for say.. .ssh or .bashrc or diff configs for diff software. Such setup would come into use in these scenarios.)
-(Remember to cover if/else statements)
-(cover how to look through the built in grains. if too many, >> it into a new document and use "less" on that documemt to peruse it slowly.)
-
-Linux distros, for example, comes in different flavors such as Debian, RHEL (Red Hat Linux), etc... where packages and commands are likely to be different. Then of course, you have your Windows vs your Macs, etc. All these systems get packages installed or configurations set in different ways, therefore if you have a wide array of OS types in your fleet of salt minions, utilizing grains and jinja is a must.
-
-For example, take the Freeipa package (Freeipa is an Authentication software)... the Debian Version of that package is called "freeipa-client", while on RHEL, it is called "ipa-client" - so here's where Jinja is useful.
+For example, take the Freeipa package (Freeipa is an Authentication software)... The Debian Version of that package is called "freeipa-client", while on RHEL, it is called "ipa-client" - so here's where Jinja is useful in that you can use it to install different versions of the same package on different distros.
 
 So if you were to have a sls that installs the package 'freeipa-client', it would run on all Debian minions but fail on a RHEL Minions.
 
-Here's an example of a syntax error:
+Another use case would be that different distros could have different configurations for say.. ".ssh" or ".bashrc" or different configs for different types of software (like NoMachine, and so on). A Jinja/Grain targeted setup would come into use in these scenarios.
 
-![alt text](syntaxError.png)
+Next, lets proceed with a simple example - the oranges.sls that we had earlier... What if we want our Ubuntu servers to have apples.txt and our Kali (or RHEL or whatever other OS) vms to have oranges.txt, we can easily arrange that with Grains and Jinja.
+
+To see what existing grains are available, run "salt '/<minion>' grains.items".
+
+This would give you a list of all the grains you can target. If you're on a server where you can't scroll up or down, you can run "salt '/<minion>' grains.items | less" or "salt '/<minion>' grains.items >> grains.txt" to export the output into the "grains.txt" file and read it with "less grains.txt" so that you can scroll up and down.
+
+![grains.items](assets/content/automatingSecurelyWithSalt/img/24.png)
+
+Say you only want to see one grain category, like the OS for example, you can run "salt '*' grains.item os" to see what OS's you have for example.
+
+![grains.item os](assets/content/automatingSecurelyWithSalt/img/22.png)
+
+Note that in this case, we are using grains.item NOT grains.itemS, as if you use grains.itemS, it will show ALL grains regardless of what you put after it.
+
+Once you've decided on what grains to target, you can then include them in your .sls files.
+
+So let's get right into that with this example...
+
+Within the /srv/salt/directory/files directory, I created a "apples.txt" with the content of "This is an apple..."
+
+Then I updated the applesAndOranges.sls file so that it looks like this:
+
+![grains.item os](assets/content/automatingSecurelyWithSalt/img/23.png)
+
+- The "if" line is saying "If the os grain is 'Ubuntu' then copy "/srv/salt/directory/files/apples.txt" from the saltmaster to /apples.txt on the salt minion".
+
+- The elif line means "Else if (or 'otherwise, if' in plain english)" so "If the os grain is 'Kali', copy the "/srv/salt/directory/files/oranges.txt" from the saltmaster to /oranges.txt on the salt minion."
+
+- The "endif" statement tells salt that you are done with the if/else statement. If you don't include that, Salt will throw an error when you run the .sls.
+
+- It is important to note that there is a space on BOTH sides between the {%%}. If you get a syntax error, it could potentially because you forgot a space on one side or the other.
+
+If you want to go through the rabbit hole of Jinja syntax, checkout the official Saltstack Jinja Wiki [here](https://docs.saltproject.io/salt/user-guide/en/latest/topics/jinja.html).
+
+You can use grains and jinja targeting in top.sls - for example, where some devices will need some of your .sls's but not others, depending on your setup and minion fleet. 
+
+If you have a company with multiple sites across the world, maybe the devices in one country would have some different .sls for the set up in that country compared to a base in a different country - especially if different sysadmins of each site have things set up slightly differently and customized to their site with some overlapping elements integral to the whole company.
+
+Moving on, lets take a look at how to use Pillars for storing secrets in Salt!
 
 ---
 ### Adding User to Minion with GPG Encrypted Password in Pillar
@@ -402,26 +439,221 @@ Here's an example of a syntax error:
 
 Before we begin, run "gpg --version" and ensure that it is on version 1 like so (this will save you HOURS of troubleshooting!):
 
-![alt text](gpgVersion.png)
+![gpg ver](assets/content/automatingSecurelyWithSalt/img/25.png)
 
 This is CRITICAL because, as pointed out in Claus Conrad's ["Using the GPG renderer to protect Salt pillar items" Blogpost](https://www.clausconrad.com/blog/using-the-gpg-renderer-to-protect-salt-pillar-items/), GPG Version 2 does NOT work for use with Salt Pillars!
 
-I tested this myself - as while I was working on the lab for this wiki, Salt kept throwing me errors about not being able to decrypt the pillar. When I found Claus's blogpost, I tried uninstalling GPG2 and installed GPG1, then and followed the same steps I used for gpg2 again, it finally worked.
+#### Here's a Rough overview of steps:
 
-I'll walk you through all the steps below.
-
-Rough overview of steps:
 1. Remove gpg2 install gnupg1
-2. symlink /gpg1 to gpg
-3. create the /etc/salt/gpgkeys directory and change the owner to salt and set the permissions properly. too permissive = gpg will complain.
-4. generate the gpgkeys - this is the key that will be used to encrypt stuff.
-5. run the command to encrypt the password AND >> it into the .sls file so that you can simply re-space it - especially if your saltmaster is a device where you cannot copy and paste.
-6. Write the credentials.sls
-7. create the top.sls for /srv/pillar and add credentials.sls to it. You cannot use the pillar if its not in /srv/pillar's top.sls as it won't be able to find it
-8. Use the pillar in one of your /srv/salt's .sls file
-9. Include the srv/salt's pillar into srv/salt's top.sls
+2. Symlink /gpg1 to gpg
+3. Create the /etc/salt/gpgkeys directory
+4. Generate the gpgkeys - this is the key that will be used to encrypt stuff.
+5. Run the command to encrypt the password AND >> it into the .sls file so that you can simply re-space it - especially if your saltmaster is a device where you cannot copy and paste.
+6. Change the owner to salt:salt and set the permissions for /etc/salt/gpgkeys properly. Too permissive = gpg will complain.
+7. Write the sls that your credentials will go into in /srv/pillar
+8. Create the top.sls for /srv/pillar and add the .sls with the credentials to it. 
+9. Use the pillar in one of your /srv/salt's .sls file - ensure you use "- hash_password: True" for safety, as there are times if you don't include that it prints the password in plaintext on the job output and is then stored in the job cache which defeats the point of using a pillar in the first place.
+10. Include the .sls file that contains the logic that uses the pillar secrets into srv/salt's top.sls for highstate.
+
+#### Now, onto the details:
+
+1. Remove gpg2 install gnupg1
+
+To do this run these two commands:
+
+```
+apt remove gpg
+
+apt install gnupg1
+
+```
+
+2. Symlink /gpg1 to gpg
+
+A symlink is a link that points to a different file so in this case by telling linux that gpg = gpg1, we can type 'gpg' rather than gpg1 when using gpg commands.
+
+To do this, run:
+
+```
+cd /usr/bin
+
+ln -s gpg1 gpg
+
+```
+
+3. Create the /etc/salt/gpgkeys directory
+
+This directory is for storing gpgkeys and will be the "home" of gpg.
+
+```
+mkdir -p /etc/salt/gpgkeys
+
+```
+
+4. Generate the gpgkeys - this is the key that will be used to encrypt stuff.
+
+To do that, run this command:
+
+```
+# Here, we define /etc/salt/gpgkeys as the home directory for gpg and tells it to generate a key for it.
+gpg --gen-key --homedir /etc/salt/gpgkeys
+
+```
+When asked what kind of key you want, Type '1' (for RSA) and press enter
+
+![key type](assets/content/automatingSecurelyWithSalt/img/31-1.png)
+
+For the keysize, leave at default and press enter and type 'Y' when prompted for confirmation.
+
+![confirm](assets/content/automatingSecurelyWithSalt/img/31-2.png)
+
+When asked for a real name, put something like 'saltmaster' for convenience. The name will be used later when we encrypt the key, so it should be something easy to type and easy to remember - preferably with no spaces.
+
+When prompted for an email, you can put something random as it does not seem to affect the decryptability of GPG, then type 'O' when prompted
+
+![user details](assets/content/automatingSecurelyWithSalt/img/31-3.png)
+
+When asked for a passphrase, leave it blank and press enter twice. This is CRITICAL since Salt won't be able to type in a passphrase as a person would, while decrypting the secrets non-interactively - thus if a password is set here, it will fail when decrypting, as mentioned in Claus Conrad's Blogpost.
+
+![user details](assets/content/automatingSecurelyWithSalt/img/31-4.png)
+
+After it generates the keys, it'll output something like this:
+
+![user details](assets/content/automatingSecurelyWithSalt/img/31-5.png)
+
+Once you see that, you should be ready to encrypt!
+
+5. Run the command to encrypt the password AND >> it into the .sls file so that you can simply re-space it - especially if your saltmaster is a device where you cannot copy and paste.
+
+To encrypt, run the following command - BUT keep in mind, this will leave the password in your shell history IF you do NOT put a space BEFORE the echo!
+
+If you forget the space, run the "history" command to find the line of history with the password in plain text and run "history -d \<line number>"
+
+```
+echo -n "yourPasswordHere" | gpg --homedir /etc/salt/gpgkeys/ --armor --batch --trust-model always --encrypt -r saltmaster >> /srv/pillar/secret.sls
+```
+
+Replace "yourPasswordHere" with the password you want to encrypt.
+Replace "saltmaster" with the name that you used when you created the gpg user
+Replace /srv/pillar/secret.sls with the name of the .sls you want or you can create it like this and rename the .sls later if you'd like.
+
+Once you're done, cat the .sls file to ensure that the hash is in there like so:
+
+![user details](assets/content/automatingSecurelyWithSalt/img/32.png)
+
+6. Change the owner to salt:salt and set the permissions for /etc/salt/gpgkeys properly. Too permissive = gpg will complain.
+
+We need to change the owner of the /etc/salt/gpgkeys directory because the saltmaster runs as the salt user. If we leave /etc/salt/gpgkeys as root, then only root can access it.
+We also need to change the permissions for the folder /etc/salt/gpg to 700 and the contents of /etc/salt/gpg to 600 otherwise GPG may decide not to decrypt due to insecure permissions.
+
+To do that, run these commands:
+
+```
+# The reason we are using chown -R here is to ensure that all items in the /etc/salt/gpgkeys directory are owned by salt. The -R is recursive which ensures nothing within that directory is missed.
+
+chown -R salt:salt /etc/salt/gpgkeys
+
+# This makes it so that the owner (in this case, salt) has FULL access to the /etc/salt/gpgkeys directory while the group(s) and others users have no access.
+
+chmod 700 /etc/salt/gpgkeys
+
+# This makes it so that the owner (in this case, salt) has ONLY read and write access to the CONTENTS of the /etc/salt/gpgkeys directory while the group(s) and others users have no access.
+
+chmod 600 /etc/salt/gpgkeys/*
+
+```
+
+7. Write the sls that your credentials will go into in /srv/pillar
+
+Here's an example of what that looks like:
+
+![sls with gpg hash](assets/content/automatingSecurelyWithSalt/img/27.png)
+
+CRITICAL things to take note of:
+
+- You MUST include a yaml/gpg shebang at the top of the .sls where your hash is stored so that the salt pillar knows to use gpg to decrypt it.
+- Include a '|' after "password:" but do NOT add any spaces after the '|'
+- You MUST include 4 spaces, not tabs for EVERY line of the password hash starting from "BEGIN PGP" to "END PGP"
+
+```
+#!yaml|gpg
+
+add_admin_user:
+# TWO SPACES for indentation
+  username: adminuser
+  password: |
+# BEGINNING HERE, we have FOUR spaces - again, do NOT use TABs here!
+    -----BEGIN PGP MESSAGE-----
+    hQEMAwd3xpOZWIUhAQgAsB16b0Mh8RDGMZjLIbp1sgq7jVUB1pqNKVmusRiruSPT
+    f56PLLQDFAt1UdIpYapS5BmwZFrBw4NbaO4S1FxQyxO1CXz/o8fhDP8kuJLTB98k
+    pXD/W2Mu4LZe01PkuF4FMKggmjiGy4M98heSbezkVK0v2CepOgr4raTp2I6hhqHg
+    tz85RUjaGRAxtk0EOvoinugYoeQom8Im1YHXZ9rzJoa9vkddNyGS1K7PFSFH2sAx
+    tCaKPdoPS9bLlRE6JlEcznO89TziVoAQ/rzU8SSTQ3lXAeilbJtnU4EFoMLcIqdc
+    l8PExvW+zg1aA9h12S2jSt0OnjTeoCfZTNYpd5kvTNJGAXTmxxrpbwxJLIZeheSU
+    XQXAP+fwqdx0LnSolo4VtblBGynhEr/K/e5IpBFObzQJtLwoYtLQ5QtfLB6vnH3c
+    wQZ5Pf+cLg==
+    =YaoR
+    -----END PGP MESSAGE-----
+
+```
+
+8. Create the top.sls for /srv/pillar and add the .sls with the credentials to it. You cannot use the pillar if its not in /srv/pillar's top.sls as it won't be able to find it
+
+The syntax is the same as /srv/salt's top.sls, except that it's located in /srv/pillar instead.
+
+![/srv/pillar's top.sls](assets/content/automatingSecurelyWithSalt/img/28.png)
+
+9. Use the pillar in one of your /srv/salt's .sls file
+
+Sample:
+
+![using the pillar in an sls](assets/content/automatingSecurelyWithSalt/img/33.png)
+
+Here, at the top a jinja variable was used to define "username" so as to keep things DRY, adhering to the concept of not repeating yourself.
+
+Ensure you use "- hash_password: True" for security, as there are times if you don't include that it prints the password in plaintext on the job output and is then stored in the job cache which defeats the point of using a pillar in the first place.
 
 
+The syntax for the pillar is as follows:
+
+```
+
+{{ pillar['pillar_SLS_File_With_HASH']['SubItem'] }}
+
+```
+
+![using the pillar in an sls](assets/content/automatingSecurelyWithSalt/img/34.png)
+
+Now to test, you can run the .sls against one minion.
+
+If it's successful, you should see an out put like this:
+
+![successful sls with pillar run](assets/content/automatingSecurelyWithSalt/img/35.png)
+
+Note that if you run into an error like "can't open /etc/salt/gpgkeys/...", the first thing you should try is to re-run the chown and chmod commands from step 6 again as gpg may have created more files in there that you need to chmod and chown on so that salt can read them.
+
+Here is a sample of the error you may run into:
+
+![gpg ver](assets/content/automatingSecurelyWithSalt/img/26.png)
+
+If you run into a Jinja Variable error, then you either have a typo in your syntax somewhere in /srv/salt's .sls or /srv/pillar's .sls or the pillar credential's .sls was not added to /srv/pillar's top.sls - in any case you'd want to go through the error and figure out where the issue lies.
+
+In this example, the error was caused by a typo in addSysadminUser.sls - which was fixed after remediating the typo.
+
+![typo error](assets/content/automatingSecurelyWithSalt/img/29.png)
+
+10. Include the .sls file that contains the logic that uses the pillar secrets into srv/salt's top.sls for highstate
+
+Once you've tested the sls on a minion and confirmed that it works as expected, add it to top.sls to be run with highstate and deployed on the rest of your salt minion fleet.
+
+![added to top.sls](assets/content/automatingSecurelyWithSalt/img/30.png)
+
+And with that, you have a working Pillar for keeping secrets in Salt!
+
+As this is the most tech heavy section of this wiki, here is a supplementary video to guide you through all these steps for setting up and using the pillar.
+
+\<INCLUDE VIDEO HERE!>
 
 ---
 ## Outro
