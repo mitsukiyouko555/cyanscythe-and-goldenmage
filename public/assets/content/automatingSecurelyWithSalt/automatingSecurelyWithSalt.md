@@ -653,7 +653,7 @@ And with that, you have a working Pillar for keeping secrets in Salt!
 
 As this is the most tech heavy section of this wiki, here is a supplementary video to guide you through all these steps for setting up and using the pillar.
 
-\<INCLUDE VIDEO HERE!>
+\<INCLUDE VIDEO HERE!!>
 
 ---
 ## Outro
