@@ -12,7 +12,7 @@ Per Wikipedia, "Salt or SaltStack is an infrastructure as code software tool for
 
 It is similar to Ansible, Puppet, and Chef.
 
-This guide will cover the basics of installing and configuring the saltmaster, installing the salt-minion to clients, basic salt usage, a short intro to how grains work for targeting different types of machines, briefly covering the built in grains as well as show you how to make custom grains. It will also show you how to install packages with salt, as well as how to use pillars for secrets (such as credentials).
+This guide will cover the basics of installing and configuring the saltmaster, installing salt-minion on the clients, basic salt usage, a short intro to how grains work for targeting different types of machines, covering the built in grains as well as custom grains. It will also show you how to install packages with salt, as well as how to use pillars for secrets (such as credentials).
 
 If you would like to follow along, here's a link to the source code: [https://github.com/mitsukiyouko555/salt-pillar-demo/](https://github.com/mitsukiyouko555/salt-pillar-demo/)
 
@@ -21,7 +21,7 @@ If you would like to follow along, here's a link to the source code: [https://gi
 ## Prerequisites
 
 - A linux server of which to install saltmaster on
-- Salt Minon installed on all clients - this can be installed during PXE Boot (in Kickstart) for example..
+- Salt Minion installed on all clients - this can be installed during PXE Boot (in Kickstart) for example.
 - Update /etc/hosts to point to the Salt Master's IP Address - usually done via PXE Boot as well, but in this example, I'll be doing this manually instead, since I don't have PXE boot set up in my lab.
 - Your salt minions and master need to be on the same network so they can communicate with each other.
 
@@ -65,33 +65,30 @@ If all is well, it should look something like this:
 
 Moving on to the Salt Minion(s)... 
 
-Salt Minions need 2 things to work properly..
+Salt Minions need 2 things to work properly.
 
 1. It needs the Salt Minion package to be installed (same steps as installing the salt master, except when you get to the part where you run "apt install salt-master" (if on debian), you replace that with "apt install salt-minion".)
 
-2. It needs to know where the saltmaster is (and what it's called if its under a different name). This can be added to /etc/hosts
+2. It needs to know where the saltmaster is (and what it's called if it's under a different name). This can be added to /etc/hosts
 
-In a some production environments, everything the salt minion needs is configured via PXE boot so that once a PC as been imaged via PXE boot, it will automatically be able to connect to the salt master - after which you can highstate a pc to your desired state.
+In some production environments, everything the salt minion needs is configured via PXE boot so that once a PC has been imaged via PXE boot, it will automatically be able to connect to the salt master - after which you can highstate a pc to your desired state.
 
-In this lab environment, however, as I don't have PXE boot set up, I'll be doing this manually.
+In this demo, this will be done manually as the lab does not have PXE boot set up.
 
-After following the installation steps as noted above, I then edited the minion's /etc/hosts file to include the ip address of my salt master and the name "salt" so that it knows to look for it. If you edited your salt master configurations in /etc/salt/master to be something other than salt, then you would put that in your /etc/hosts.
+After following the installation steps as noted above, the salt minion's /etc/hosts file is edited to include the ip address of the saltmaster and the name "salt" so that it knows to look for it. If you edited your salt master configurations in /etc/salt/master to be something other than salt, then you would put that in your /etc/hosts.
 
 Do note that that is not the same name as the HOSTNAME of your saltmaster - but rather the name of the saltmaster within the saltmaster "master" configurations!
 
-As you can see here, the HOSTNAME of my saltmaster is "hydra" and its ip is 172.16.78.146 - but that does not affect the fact that the salt minion service will refer to 172.16.78.146 as "salt" rather than "hydra".
+As you can see here, the HOSTNAME of the saltmaster is "hydra" and its ip is 172.16.78.146 - but that does not affect the fact that the salt minion service will refer to 172.16.78.146 as "salt" rather than "hydra".
 
 ![saltmaster ip a](assets/content/automatingSecurelyWithSalt/img/2.png)
 
-My first salt minion is an Ubuntu 2404 VM while my second salt minion is a Kali Linux VM as I've had that VM for the longest time so I figured I'd integrate it into this lab.
 
-The Kali VM has a better GUI so most of the salt-minion screenshots will be from there.
-
-So here on the Kali VM, I opened /etc/hosts:
+In a lab environment, you'd open /etc/hosts:
 
 ![/etc/hosts](assets/content/automatingSecurelyWithSalt/img/3.png)
 
-And added the IP address for the saltmaster like so:
+And add the IP address for the saltmaster like so:
 
 ![updated /etc/hosts](assets/content/automatingSecurelyWithSalt/img/4.png)
 
@@ -104,27 +101,19 @@ What these commands do is enable the service so if the server reboots, then the 
 
 Systemctl restart, as the name implies, restarts the service. The reason we do this after adding the saltmaster's ip address to the minion's /etc/hosts is because on some linux distros, it automatically starts the salt-minion service after the installation. So to get it to see the new configs so that it can find the salt master, you would restart the service so that when it comes back up, it sees the new configurations.
 
-IF you get an error on the salt minion, check the following:
+IF you get an error on the salt minion like so:
+
+Here, the salt minion is installed but it's showing as inactive (dead).
+
+![salt-minion - inactive](assets/content/automatingSecurelyWithSalt/img/5.png)
+
+Then check the following:
 
 1. Is the IP you put in /etc/hosts correct? If not, correct it, then run 'systemctl restart salt-minion', and then run "systemctl status salt-minion" and see if it is up.
 2. IF the IP IS correct, then check to make sure that the salt-minion is on the same network as the salt master. If they are on different networks, they won't be able to talk to each other.
 3. Are the salt master and salt minion on the same salt VERSION? (You can check this by running "salt-master -V" or "salt-minion -V"). If they are NOT on the same version, you will need to uninstall the salt minion, and reinstall the version of the salt minion that matches the salt master. 
 
 Say, for example, the latest version is salt 3008, but your salt master is on 3007, and your salt minion keeps pulling the 3008 package because it sees that as the latest one, you will need to pin 3007 using the Salt Installation instructions for your respective OS, and pin it before installing.
-
-Example:
-
-Here, the salt minion is installed but it's showing as inactive (dead).
-
-![salt-minion - inactive](assets/content/automatingSecurelyWithSalt/img/5.png)
-
-I checked my /etc/hosts and realized that I had a typo in the ip address for the "salt" entry.
-
-After I fixed that, I restarted the salt-minion service.. Still, nothing..
-
-Then I checked the network my Kali VM was on compared to the Saltmaster and realized they were on two different networks.
-
-I then switched the Kali VM over to the same network and restarted the salt-minon service again and bam there it is!
 
 ##### ------------------------------------------------------------------------------
 
@@ -146,15 +135,15 @@ If you ever need to re-register a minion, say if you removed salt-minion to inst
 
 ![delete and re-add salt minion](assets/content/automatingSecurelyWithSalt/img/6-3.png)
 
-Once you have added it, you can try test the connection between the master and minion by running "salt '*' test.ping".
+Once you have added it, you can try to test the connection between the master and minion by running "salt '*' test.ping".
 
 Here, "*" refers to "all" minions. If you want to target only one minion, you can put the minion's name in between the single quotes, like so "salt 'kali' test.ping".
 
-If you get a response, that means it is good to go - and if you get a "minion did not return. [Not Connected]", that means that either the minion is offline or it is not recieving pings OR it could be that there is a mismatch between the salt minion and master versions thus leading them to not be able to talk to each other.
+If you get a response, that means it is good to go - and if you get a "minion did not return. [Not Connected]", that means that either the minion is offline or it is not receiving pings OR it could be that there is a mismatch between the salt minion and master versions thus leading them to not be able to talk to each other.
 
 ![salt ping](assets/content/automatingSecurelyWithSalt/img/7.png)
 
-Sometimes, as you work with salt, a minion could have its salt-minon service up but not be returning responses to the saltmaster. In that case, using test.ping can give it a "kick" so to speak, and get it talking to the saltmaster again.
+Sometimes, as you work with salt, a minion could have its salt-minion service up but not be returning responses to the saltmaster. In that case, using test.ping can give it a "kick" so to speak, and get it talking to the saltmaster again.
 
 ![salt ping kick](assets/content/automatingSecurelyWithSalt/img/7-1.png)
 
@@ -173,17 +162,17 @@ You can run states on minions in one of 2 ways - Highstate, or state.sls.
 
 To understand what these are you'd first need to know what sls's are.
 
-.sls files are state files in that they contain what the *expected* state of the machine should look like.. (For example, VS Code should be installed on it, or nsswitch.conf on the minion should be exactly the same as the nsswitch.conf template on the saltmaster.)
+.sls files are state files in that they contain what the *expected* state of the machine should look like. (For example, VS Code should be installed on it, or nsswitch.conf on the minion should be exactly the same as the nsswitch.conf template on the saltmaster.)
 
-You could have an sls for adding local users, a different sls for installing all the software that is needed, another sls for configuring certain files, etc.. The possibilities are endless.
+You could have an sls for adding local users, a different sls for installing all the software that is needed, another sls for configuring certain files, etc. The possibilities are endless.
 
 However, top.sls is a special state file. It is a master document of all the .sls's. It pulls in all other .sls's that needs to be run so nothing gets missed.
 
-The summarize: 
+To summarize: 
 - The point of a top.sls is to INCLUDE other sls's in it
 - The individual sls's contain the LOGIC used to do what is needed.
 
-Salt .sls files use YAML syntax. This means that the first statement is smack-dab to the left, and substatements of it are indented to the right 2 spaces at a time.
+Salt .sls files use YAML syntax. This means that the first statement is aligned to the left, and substatements of it are indented to the right 2 spaces at a time.
 
 ### NOTE: Do NOT use tab to indent - only use spaces 2 at a time.
 
@@ -201,9 +190,12 @@ base:
 Example of a regular .sls file:
 
 ```
-installMicro: (Name of the set of commands - optional)
-  pkg.installed: (This command tells the pc to use its native install method to install the noted packages.)
-    - name: micro (This is the name of the package to install)
+# Name of the set of commands
+installMicro:
+  # This command tells the pc to use its native install method to install the noted packages.
+  pkg.installed: 
+    # This is the name of the package to install
+    - name: micro
 ```
 
 Here is what it looks like without the comments (see how each nested item is indented by TWO SPACES):
@@ -214,7 +206,7 @@ installMicro:
     - name: micro
 ```
 
-There's a shortnand way to write it too, which is like this:
+There's a shorthand way to write it too, which is like this:
 
 ```
 micro:
@@ -223,7 +215,7 @@ micro:
 
 But issue with that is... you can't include multiple packages in one command.
 
-You can use the shortand if there is only one package to install but if you have multiple packages to install, you can do so like this:
+You can use the shorthand method if there is only one package to install but if you have multiple packages to install, you can do so like this:
 
 ```
 installPkgs:
@@ -272,13 +264,13 @@ Once you have a top.sls all set up, to run it, run "salt '\<minion>' state.highs
 
 IF you ONLY want to run the individual .sls for testing purposes, instead of running highstate, you'd run it like so: "salt '\<minion>' state.sls \<sls_Name>".
 
-Usually, if you are running just that one SLS, it'd mostly be for testing.. in which case you'd only want to make sure to run it on your test machine, NOT on '*', unless you've already tested it and intend to make a production change that can be done by running that sls once. 
+Usually, if you are running just that one SLS, it'd mostly be for testing... in which case you'd only want to make sure to run it on your test machine, NOT on '*', unless you've already tested it and intend to make a production change that can be done by running that sls once. 
 
 An example of running ONE .sls on '*' would be to change where an existing NFS mount is pointing (in the event that the source of that mount is to be migrated to another server) - you wouldn't want to put that .sls in top.sls. 
 
 Instead, you'd want to edit the original mount .sls so that it points to the new mount for NEW machines for when they get the state applied - but what about the old ones?
 
-Obviously, you need to make it so the old ones point to this new mount.. But in that case, you'd only need to run it once for all machines so that all EXISTING machines have their fstab/mounts pointing to that new mount as the new machines are covered by the updated .sls.
+Obviously, you need to make it so the old ones point to this new mount... But in that case, you'd only need to run it once for all machines so that all EXISTING machines have their fstab/mounts pointing to that new mount as the new machines are covered by the updated .sls.
 
 So in that case you'd run your migrateNFS.sls on all existing minions with '*'.
 
@@ -292,7 +284,7 @@ Sometimes if you have dpkg errors, you have to ssh to the machine and fix the dp
 
 TIP: If you want to know where in your salt state it's working on when running, you can ssh to the minion and run 'journalctl -f' to follow it as it walks through the commands. You'll see something like this:
 
-![journactl -f](assets/content/automatingSecurelyWithSalt/img/13.png)
+![journalctl -f](assets/content/automatingSecurelyWithSalt/img/13.png)
 
 When it's using "aptpkg", you'll know that it's installing something. Some linux distros might actually tell you what it's installing while others might not but at least you get a sense of what it's doing in that you know its not updating a config right now, rather, it is in the middle of installing something.
 
@@ -302,7 +294,7 @@ If you ran it once, and want to run it again, it will turn from blue to green if
 
 To show you what you can do with file management in Salt, I'll give you another example.
 
-Say you want to copy a file that has certain configurations.. In this simple example, let's say want to put a file in the minion's root directory that says "I'm an Orange" when the file is read. 
+Say you want to copy a file that has certain configurations... In this simple example, let's say want to put a file in the minion's root directory that says "I'm an Orange" when the file is read. 
 
 So to do this, you need a few things:
 1. A file called orange.txt with the text "I'm an Orange" that sits somewhere within /srv/salt or one of its subdirectory on the saltmaster
@@ -313,7 +305,7 @@ First, create a directory, alongside top.sls. In this example, for simplificatio
 
 ![directory folder](assets/content/automatingSecurelyWithSalt/img/15.png)
 
-The, create the applesAndOranges.sls file, along with a "files" directory.
+Then, create the applesAndOranges.sls file, along with a "files" directory.
 
 In a production environment, many times, sls's that need certain files have the files within a sub directory next to that .sls, albeit with better and more specific naming conventions than just "files".
 
@@ -387,7 +379,7 @@ For example, take the Freeipa package (Freeipa is an Authentication software)...
 
 So if you were to have a sls that installs the package 'freeipa-client', it would run on all Debian minions but fail on a RHEL Minions.
 
-Another use case would be that different distros could have different configurations for say.. ".ssh" or ".bashrc" or different configs for different types of software (like NoMachine, and so on). A Jinja/Grain targeted setup would come into use in these scenarios.
+Another use case would be that different distros could have different configurations for say... ".ssh" or ".bashrc" or different configs for different types of software (like NoMachine, and so on). A Jinja/Grain targeted setup would come into use in these scenarios.
 
 Next, lets proceed with a simple example - the oranges.sls that we had earlier... What if we want our Ubuntu servers to have apples.txt and our Kali (or RHEL or whatever other OS) vms to have oranges.txt, we can easily arrange that with Grains and Jinja.
 
@@ -397,7 +389,7 @@ This would give you a list of all the grains you can target. If you're on a serv
 
 ![grains.items](assets/content/automatingSecurelyWithSalt/img/24.png)
 
-Say you only want to see one grain category, like the OS for example, you can run "salt '*' grains.item os" to see what OS's you have for example.
+Say you only want to see one grain category, like the OS for example, you can run "salt '*' grains.item os" to see what OS's you have.
 
 ![grains.item os](assets/content/automatingSecurelyWithSalt/img/22.png)
 
@@ -432,10 +424,11 @@ Moving on, lets take a look at how to use Pillars for storing secrets in Salt!
 ---
 ### Adding User to Minion with GPG Encrypted Password in Pillar
 
-(introduce the concept of pillars. What is a pillar?)
+The Salt Pillar is where secrets, like passwords and credentials, are stored.
 
-(make a note about making the /srv/pillar directory)
-(also note how pillars also have their own top.sls which is different from /srv/salt's top.sls but functions similarly with respect to its own surrounding .sls's in the /srv/pillar directory.)
+The default pillar directory is /srv/pillar - so you will need to create this directory if it does not exist.
+
+The /srv/pillar directory will also have its own top.sls and .sls files much like the /srv/salt directory.
 
 Before we begin, run "gpg --version" and ensure that it is on version 1 like so (this will save you HOURS of troubleshooting!):
 
@@ -454,7 +447,7 @@ This is CRITICAL because, as pointed out in Claus Conrad's ["Using the GPG rende
 7. Write the sls that your credentials will go into in /srv/pillar
 8. Create the top.sls for /srv/pillar and add the .sls with the credentials to it. 
 9. Use the pillar in one of your /srv/salt's .sls file - ensure you use "- hash_password: True" for safety, as there are times if you don't include that it prints the password in plaintext on the job output and is then stored in the job cache which defeats the point of using a pillar in the first place.
-10. Include the .sls file that contains the logic that uses the pillar secrets into srv/salt's top.sls for highstate.
+10. Include the .sls file that contains the logic that uses the pillar secrets into /srv/salt's top.sls for highstate.
 
 #### Now, onto the details:
 
@@ -627,7 +620,7 @@ The syntax for the pillar is as follows:
 
 Now to test, you can run the .sls against one minion.
 
-If it's successful, you should see an out put like this:
+If it's successful, you should see an output like this:
 
 ![successful sls with pillar run](assets/content/automatingSecurelyWithSalt/img/35.png)
 
@@ -643,7 +636,7 @@ In this example, the error was caused by a typo in addSysadminUser.sls - which w
 
 ![typo error](assets/content/automatingSecurelyWithSalt/img/29.png)
 
-10. Include the .sls file that contains the logic that uses the pillar secrets into srv/salt's top.sls for highstate
+10. Include the .sls file that contains the logic that uses the pillar secrets into /srv/salt's top.sls for highstate
 
 Once you've tested the sls on a minion and confirmed that it works as expected, add it to top.sls to be run with highstate and deployed on the rest of your salt minion fleet.
 
