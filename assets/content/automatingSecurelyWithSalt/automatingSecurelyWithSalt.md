@@ -1,5 +1,5 @@
 ---
-title: Automating Securely with Salt
+title: Automating Securely with Salt Pillars
 author: Mitsuki Youko
 date_created: 2026-02-04
 tag: techwriting
