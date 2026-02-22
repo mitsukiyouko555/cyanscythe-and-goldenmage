@@ -12,7 +12,7 @@ Per Wikipedia, "Salt or SaltStack is an infrastructure as code software tool for
 
 It is similar to Ansible, Puppet, and Chef.
 
-This guide will cover the basics of installing and configuring the saltmaster, installing salt-minion on the clients, basic salt usage, a short intro to how grains work for targeting different types of machines, covering the built in grains as well as custom grains. It will also show you how to install packages with salt, as well as how to use pillars for secrets (such as credentials).
+This guide will cover the basics of installing and configuring the saltmaster, installing salt-minion on the clients, basic salt usage, and includes a short intro on how default and custom grains work for targeting different types of machines. It will also show you how to install packages with salt, as well as how to use pillars for secrets (such as credentials).
 
 If you would like to follow along, here's a link to the source code: [https://github.com/mitsukiyouko555/salt-pillar-demo/](https://github.com/mitsukiyouko555/salt-pillar-demo/)
 
@@ -20,16 +20,16 @@ If you would like to follow along, here's a link to the source code: [https://gi
 
 ## Prerequisites
 
-- A linux server of which to install saltmaster on
+- A linux server of which to install the saltmaster on
 - Salt Minion installed on all clients - this can be installed during PXE Boot (in Kickstart) for example.
-- Update /etc/hosts to point to the Salt Master's IP Address - usually done via PXE Boot as well, but in this example, I'll be doing this manually instead, since I don't have PXE boot set up in my lab.
+- Update /etc/hosts to point to the Saltmaster's IP Address - usually done via PXE Boot as well.
 - Your salt minions and master need to be on the same network so they can communicate with each other.
 
 ---
 
 ## Installing Saltmaster
 
-Navigate to [https://docs.saltproject.io/salt/install-guide/en/latest/](https://docs.saltproject.io/salt/install-guide/en/latest/) and pick the install option that best fits the machine you want to designate as your salt master.
+Navigate to [https://docs.saltproject.io/salt/install-guide/en/latest/](https://docs.saltproject.io/salt/install-guide/en/latest/) and pick the install option that best fits the machine you want to designate as your saltmaster.
 
 ![salt installation instructions](assets/content/automatingSecurelyWithSalt/img/0.png)
 
@@ -49,7 +49,7 @@ curl -fsSL https://github.com/saltstack/salt-install-guide/releases/latest/downl
 # Refreshes apt repos
 apt update
 
-# Installs Salt Master
+# Installs Saltmaster
 apt install salt-master
 ```
 
@@ -57,7 +57,7 @@ Once done, run "systemctl enable salt-master" to ensure that the service automat
 
 If all is well, it should look something like this:
 
-![salt master status](assets/content/automatingSecurelyWithSalt/img/1.png)
+![saltmaster status](assets/content/automatingSecurelyWithSalt/img/1.png)
 
 ---
 
@@ -67,15 +67,15 @@ Moving on to the Salt Minion(s)...
 
 Salt Minions need 2 things to work properly.
 
-1. It needs the Salt Minion package to be installed (same steps as installing the salt master, except when you get to the part where you run "apt install salt-master" (if on debian), you replace that with "apt install salt-minion".)
+1. It needs the salt-minion package to be installed (same steps as installing the saltmaster, except when you get to the part where you run "apt install salt-master" (if on debian), you replace that with "apt install salt-minion".)
 
 2. It needs to know where the saltmaster is (and what it's called if it's under a different name). This can be added to /etc/hosts
 
-In some production environments, everything the salt minion needs is configured via PXE boot so that once a PC has been imaged via PXE boot, it will automatically be able to connect to the salt master - after which you can highstate a pc to your desired state.
+In some production environments, everything the salt minion needs is configured via PXE boot so that once a PC has been imaged via PXE boot, it will automatically be able to connect to the saltmaster - after which you can highstate a pc to your desired state.
 
 In this demo, this will be done manually as the lab does not have PXE boot set up.
 
-After following the installation steps as noted above, the salt minion's /etc/hosts file is edited to include the ip address of the saltmaster and the name "salt" so that it knows to look for it. If you edited your salt master configurations in /etc/salt/master to be something other than salt, then you would put that in your /etc/hosts.
+After following the installation steps as noted above, the salt minion's /etc/hosts file is edited to include the ip address of the saltmaster and the name "salt" so that it knows to look for it. If you edited your saltmaster configurations in /etc/salt/master to be something other than salt, then you would put that in your /etc/hosts.
 
 Do note that that is not the same name as the HOSTNAME of your saltmaster - but rather the name of the saltmaster within the saltmaster "master" configurations!
 
@@ -99,21 +99,19 @@ Once that's done, on the salt-minion, run these 3 commands:
 
 What these commands do is enable the service so if the server reboots, then the service will auto start on its own rather than needing you to start it manually. 
 
-Systemctl restart, as the name implies, restarts the service. The reason we do this after adding the saltmaster's ip address to the minion's /etc/hosts is because on some linux distros, it automatically starts the salt-minion service after the installation. So to get it to see the new configs so that it can find the salt master, you would restart the service so that when it comes back up, it sees the new configurations.
+Systemctl restart, as the name implies, restarts the service. The reason we do this after adding the saltmaster's ip address to the minion's /etc/hosts is because on some linux distros, it automatically starts the salt-minion service after the installation. So to get it to see the new configs so that it can find the saltmaster, you would restart the service so that when it comes back up, it sees the new configurations.
 
-IF you get an error on the salt minion like so:
-
-Here, the salt minion is installed but it's showing as inactive (dead).
+You may run into an issue where the salt minion is installed but it's showing as inactive (dead) even after "running systemctl restart".
 
 ![salt-minion - inactive](assets/content/automatingSecurelyWithSalt/img/5.png)
 
-Then check the following:
+If you get such an error, check the following:
 
 1. Is the IP you put in /etc/hosts correct? If not, correct it, then run 'systemctl restart salt-minion', and then run "systemctl status salt-minion" and see if it is up.
-2. IF the IP IS correct, then check to make sure that the salt-minion is on the same network as the salt master. If they are on different networks, they won't be able to talk to each other.
-3. Are the salt master and salt minion on the same salt VERSION? (You can check this by running "salt-master -V" or "salt-minion -V"). If they are NOT on the same version, you will need to uninstall the salt minion, and reinstall the version of the salt minion that matches the salt master. 
+2. IF the IP IS correct, then check to make sure that the salt-minion is on the same network as the saltmaster. If they are on different networks, they won't be able to talk to each other.
+3. Are the saltmaster and salt minion on the same salt VERSION? (You can check this by running "salt-master -V" or "salt-minion -V"). If they are NOT on the same version, you will need to uninstall the salt minion, and reinstall the version of the salt minion that matches the saltmaster. 
 
-Say, for example, the latest version is salt 3008, but your salt master is on 3007, and your salt minion keeps pulling the 3008 package because it sees that as the latest one, you will need to pin 3007 using the Salt Installation instructions for your respective OS, and pin it before installing.
+Say, for example, the latest version is salt 3008, but your saltmaster is on 3007, and your salt minion keeps pulling the 3008 package because it sees that as the latest one, you will need to pin Version 3007 using the Salt Installation instructions for your respective OS before re-installing.
 
 ##### ------------------------------------------------------------------------------
 
@@ -131,7 +129,7 @@ To delete a minion, run "salt-key -d \<minion-name>"
 
 ![delete salt minion](assets/content/automatingSecurelyWithSalt/img/6-2.png)
 
-If you ever need to re-register a minion, say if you removed salt-minion to install a different version or if you reimaged the pc and now it's getting re-registered again, you will first need to run "salt-key -d \<minion-name>", then RESTART the SALT-MINION service on the salt minion so that it reaches out to connect to the saltmaster again, then run "salt-key -a \<minion-name>" to properly add it back. If you don't remove it and re-add it back, you may run into issues when you try to run states (state.sls or highstate) against your minion.
+If you ever need to re-register a minion, say if you removed salt-minion to install a different version or if you reimaged the pc and now it's getting re-registered again, you will first need to run "salt-key -d \<minion-name>" on the saltmaster, then RESTART the SALT-MINION service on the salt minion so that it reaches out to connect to the saltmaster again, then run "salt-key -a \<minion-name>" on the saltmaster to properly add it back. If you don't remove it and re-add it back, you may run into issues where the saltmaster can't connect to the salt minion when you try to run states (state.sls or highstate) against your minion.
 
 ![delete and re-add salt minion](assets/content/automatingSecurelyWithSalt/img/6-3.png)
 
@@ -154,9 +152,9 @@ Alright, now that the saltmaster is able to connect to the saltminions, lets tal
 
 First, create  the /srv/salt directory with "mkdir -p /srv/salt".
 
-That is the default path that the salt master looks at to find salt "states". (You can change this in the /etc/salt/master configs if you so choose.)
+That is the default path that the saltmaster looks at to find salt "states". (You can change this in the /etc/salt/master configs if you so choose.)
 
-States are files that contain information on what you want a system to look like, for example, if you want app xyz installed, and certain files configured certain ways.
+States are files that contain information on what you want a system to look like.
 
 You can run states on minions in one of 2 ways - Highstate, or state.sls.
 
@@ -242,7 +240,7 @@ Here, the base target is '*' which means "all" minions:
 
 Other .sls files can either sit beside it or sit within a directory in /srv/salt to be referenced.
 
-As you can see, installStuff is sitting in the same directory as top.sls so it can be referenced directly, but applesAndOranges.sls is within the directory folder, therefore it is written as directory.applesAndOranges - if you don't include the directory, you'll get an error where it says it can't find the file.
+As you can see, installStuff is sitting in the same directory as top.sls so it can be referenced directly, but applesAndOranges.sls is within the "directory" folder, therefore it is written as "directory.applesAndOranges" - if you don't include the "directory" part of it, you'll get an error where it says it can't find the file.
 
 Also take note that when referencing .sls files, we do NOT include .sls in their name as you can see in that screenshot, but it is expected that they be in the proper directory - ie somewhere within the /srv/salt directory (or whatever directory you designate in /etc/salt/master if you configured it so that it no longer uses the default directories.)
 
@@ -270,11 +268,11 @@ An example of running ONE .sls on '*' would be to change where an existing NFS m
 
 Instead, you'd want to edit the original mount .sls so that it points to the new mount for NEW machines for when they get the state applied - but what about the old ones?
 
-Obviously, you need to make it so the old ones point to this new mount... But in that case, you'd only need to run it once for all machines so that all EXISTING machines have their fstab/mounts pointing to that new mount as the new machines are covered by the updated .sls.
+You'd of course need to make it so the old ones point to this new mount... But in that case, you'd only need to run it once for all machines so that all EXISTING machines have their fstab/mounts pointing to that new mount as the new machines are covered by the updated .sls.
 
 So in that case you'd run your migrateNFS.sls on all existing minions with '*'.
 
-For testing purposes, however, here's an Example:
+For testing purposes, however, here's an example:
 
 If the state has been applied successfully, you'll see a success message.
 
@@ -294,7 +292,7 @@ If you ran it once, and want to run it again, it will turn from blue to green if
 
 To show you what you can do with file management in Salt, I'll give you another example.
 
-Say you want to copy a file that has certain configurations... In this simple example, let's say want to put a file in the minion's root directory that says "I'm an Orange" when the file is read. 
+Say you want to copy a file that has certain configurations... In this simple example, let's say you want to put a file in the minion's root directory that says "I'm an Orange" when the file is read. 
 
 So to do this, you need a few things:
 1. A file called orange.txt with the text "I'm an Orange" that sits somewhere within /srv/salt or one of its subdirectory on the saltmaster
@@ -345,7 +343,7 @@ If it is successful, you'll see something like this:
 
 ![applesAndOranges.sls](assets/content/automatingSecurelyWithSalt/img/20.png)
 
-If it fails, it could be because you have a syntax error (things aren't indented properly using spaces, no tabs), or it can't find the file so your source path may be wrong, or there could be some typos in the .sls. 
+If it fails, it could be because you have a syntax error (things aren't indented properly using spaces, or it detects that tabs are being used), or it can't find the file so your source path may be wrong, or there could be some typos in the .sls. 
 
 Here's an example of a syntax error:
 
@@ -375,7 +373,7 @@ Example: If X os, install package A, else-if Y os install Package B, else instal
 
 Linux distros, for example, comes in different flavor such as Debian, RHEL (Red Hat Linux), etc... where packages and commands are likely to be different. Then of course, you have your Windows vs your Macs, etc. All these systems get packages installed or configurations set in different ways, therefore if you have a wide array of OS types in your fleet of salt minions, utilizing grains and jinja is a must.
 
-For example, take the Freeipa package (Freeipa is an Authentication software)... The Debian Version of that package is called "freeipa-client", while on RHEL, it is called "ipa-client" - so here's where Jinja is useful in that you can use it to install different versions of the same package on different distros.
+For example, take the Freeipa package (Freeipa is an Authentication / Identity Management software)... The Debian Version of that package is called "freeipa-client", while on RHEL, it is called "ipa-client" - so here's where Jinja is useful in that you can use it to install different versions of the same package on different distros.
 
 So if you were to have a sls that installs the package 'freeipa-client', it would run on all Debian minions but fail on a RHEL Minions.
 
@@ -434,7 +432,7 @@ Before we begin, run "gpg --version" and ensure that it is on version 1 like so 
 
 ![gpg ver](assets/content/automatingSecurelyWithSalt/img/25.png)
 
-This is CRITICAL because, as pointed out in Claus Conrad's ["Using the GPG renderer to protect Salt pillar items" Blogpost](https://www.clausconrad.com/blog/using-the-gpg-renderer-to-protect-salt-pillar-items/), GPG Version 2 does NOT work for use with Salt Pillars!
+This is CRITICAL because, as pointed out in Claus Conrad's ["Using the GPG renderer to protect Salt pillar items" Blogpost](https://www.clausconrad.com/blog/using-the-gpg-renderer-to-protect-salt-pillar-items/), GPG Version 2 does NOT work when used with Salt Pillars!
 
 #### Here's a Rough overview of steps:
 
@@ -493,7 +491,7 @@ To do that, run this command:
 gpg --gen-key --homedir /etc/salt/gpgkeys
 
 ```
-When asked what kind of key you want, Type '1' (for RSA) and press enter
+When asked what kind of key you want, Type '1' (for RSA) and press enter.
 
 ![key type](assets/content/automatingSecurelyWithSalt/img/31-1.png)
 
@@ -507,7 +505,9 @@ When prompted for an email, you can put something random as it does not seem to 
 
 ![user details](assets/content/automatingSecurelyWithSalt/img/31-3.png)
 
-When asked for a passphrase, leave it blank and press enter twice. This is CRITICAL since Salt won't be able to type in a passphrase as a person would, while decrypting the secrets non-interactively - thus if a password is set here, it will fail when decrypting, as mentioned in Claus Conrad's Blogpost.
+When asked for a passphrase, leave it blank and press enter twice.
+
+This is CRITICAL since Salt won't be able to type in a passphrase as a person would, while decrypting the secrets non-interactively - thus if a password is set here, it will fail when decrypting, as mentioned in Claus Conrad's Blogpost.
 
 ![user details](assets/content/automatingSecurelyWithSalt/img/31-4.png)
 
@@ -527,9 +527,9 @@ If you forget the space, run the "history" command to find the line of history w
 echo -n "yourPasswordHere" | gpg --homedir /etc/salt/gpgkeys/ --armor --batch --trust-model always --encrypt -r saltmaster >> /srv/pillar/secret.sls
 ```
 
-Replace "yourPasswordHere" with the password you want to encrypt.
-Replace "saltmaster" with the name that you used when you created the gpg user
-Replace /srv/pillar/secret.sls with the name of the .sls you want or you can create it like this and rename the .sls later if you'd like.
+- Replace "yourPasswordHere" with the password you want to encrypt.
+- Replace "saltmaster" with the name that you used when you created the gpg user.
+- Replace /srv/pillar/secret.sls with the name of the .sls you want or you can create it like this and rename the .sls later if you'd like.
 
 Once you're done, cat the .sls file to ensure that the hash is in there like so:
 
@@ -538,6 +538,7 @@ Once you're done, cat the .sls file to ensure that the hash is in there like so:
 6. Change the owner to salt:salt and set the permissions for /etc/salt/gpgkeys properly. Too permissive = gpg will complain.
 
 We need to change the owner of the /etc/salt/gpgkeys directory because the saltmaster runs as the salt user. If we leave /etc/salt/gpgkeys as root, then only root can access it.
+
 We also need to change the permissions for the folder /etc/salt/gpg to 700 and the contents of /etc/salt/gpg to 600 otherwise GPG may decide not to decrypt due to insecure permissions.
 
 To do that, run these commands:
@@ -606,7 +607,6 @@ Sample:
 Here, at the top a jinja variable was used to define "username" so as to keep things DRY, adhering to the concept of not repeating yourself.
 
 Ensure you use "- hash_password: True" for security, as there are times if you don't include that it prints the password in plaintext on the job output and is then stored in the job cache which defeats the point of using a pillar in the first place.
-
 
 The syntax for the pillar is as follows:
 
