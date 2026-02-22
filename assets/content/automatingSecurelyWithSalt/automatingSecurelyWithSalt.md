@@ -295,9 +295,9 @@ To show you what you can do with file management in Salt, I'll give you another 
 Say you want to copy a file that has certain configurations... In this simple example, let's say you want to put a file in the minion's root directory that says "I'm an Orange" when the file is read. 
 
 So to do this, you need a few things:
-1. A file called orange.txt with the text "I'm an Orange" that sits somewhere within /srv/salt or one of its subdirectory on the saltmaster
-2. An applesAndOranges.sls (the naming will be explained later but basically you need a .sls to tell salt which file to pick up on the saltmaster and where to put it on the salt-minion)
-3. Include the applesAndOranges.sls into top.sls
+1. A file called orange.txt with the text "I'm an Orange" that sits somewhere within /srv/salt or one of its subdirectory on the saltmaster.
+2. An applesAndOranges.sls (the naming will be explained later but basically you need a .sls to tell salt which file to pick up on the saltmaster and where to put it on the salt-minion).
+3. Include the applesAndOranges.sls into top.sls.
 
 First, create a directory, alongside top.sls. In this example, for simplification purposes, it is called "directory".
 
@@ -335,7 +335,7 @@ Here is a visual for those who are more visually inclined:
 
 ![applesAndOranges.sls](assets/content/automatingSecurelyWithSalt/img/19.png)
 
-Now that the applesAndOranges.sls file has been created, let's test it by running it on ONE minion with this command: "salt '\<minion>' state.sls applesAndOranges"
+Now that the applesAndOranges.sls file has been created, let's test it by running it on ONE minion with this command: "salt '\<minion>' state.sls applesAndOranges".
 
 Note that here, we don't include .sls in the applesAndOranges name because we are already calling state.sls.
 
@@ -566,9 +566,9 @@ Here's an example of what that looks like:
 
 CRITICAL things to take note of:
 
-- You MUST include a yaml/gpg shebang at the top of the .sls where your hash is stored so that the salt pillar knows to use gpg to decrypt it
-- Include a '|' after "password:" but do NOT add any spaces after the '|'
-- You MUST include 4 spaces, not tabs for EVERY line of the password hash starting from "BEGIN PGP" to "END PGP"
+- You MUST include a yaml/gpg shebang at the top of the .sls where your hash is stored so that the salt pillar knows to use gpg to decrypt it.
+- Include a '|' after "password:" but do NOT add any spaces after the '|'.
+- You MUST include 4 spaces, not tabs for EVERY line of the password hash starting from "BEGIN PGP" to "END PGP".
 
 ```
 #!yaml|gpg
