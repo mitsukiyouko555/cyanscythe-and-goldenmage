@@ -22,7 +22,7 @@ If you would like to follow along, here's a link to the source code: [https://gi
 
 - A linux server of which to install the saltmaster on
 - Salt Minion installed on all clients - this can be installed during PXE Boot (in Kickstart) for example.
-- Update /etc/hosts to point to the Saltmaster's IP Address - usually done via PXE Boot as well.
+- Update the Salt Minion's /etc/hosts to point to the Saltmaster's IP Address - usually done via PXE Boot as well.
 - Your salt minions and master need to be on the same network so they can communicate with each other.
 
 ---
@@ -148,9 +148,9 @@ Sometimes, as you work with salt, a minion could have its salt-minion service up
 ---
 ## Basic Salt Usage
 
-Alright, now that the saltmaster is able to connect to the saltminions, lets talk about how to use salt.
+Alright, now that the saltmaster is able to connect to the salt minions, lets talk about how to use salt.
 
-First, create  the /srv/salt directory with "mkdir -p /srv/salt".
+First, create the /srv/salt directory with "mkdir -p /srv/salt".
 
 That is the default path that the saltmaster looks at to find salt "states". (You can change this in the /etc/salt/master configs if you so choose.)
 
@@ -164,7 +164,7 @@ To understand what these are you'd first need to know what sls's are.
 
 You could have an sls for adding local users, a different sls for installing all the software that is needed, another sls for configuring certain files, etc. The possibilities are endless.
 
-However, top.sls is a special state file. It is a master document of all the .sls's. It pulls in all other .sls's that needs to be run so nothing gets missed.
+However, top.sls is a special state file. It is a master document of all the .sls's. It pulls in all other .sls's that need to be run so nothing gets missed.
 
 To summarize: 
 - The point of a top.sls is to INCLUDE other sls's in it
@@ -211,7 +211,7 @@ micro:
   pkg.installed
 ```
 
-But issue with that is... you can't include multiple packages in one command.
+But the issue with that is... you can't include multiple packages in one command.
 
 You can use the shorthand method if there is only one package to install but if you have multiple packages to install, you can do so like this:
 
@@ -297,7 +297,7 @@ Say you want to copy a file that has certain configurations... In this simple ex
 So to do this, you need a few things:
 1. A file called orange.txt with the text "I'm an Orange" that sits somewhere within /srv/salt or one of its subdirectory on the saltmaster
 2. An applesAndOranges.sls (the naming will be explained later but basically you need a .sls to tell salt which file to pick up on the saltmaster and where to put it on the salt-minion)
-3. I'd then need to include the applesAndOranges.sls into top.sls
+3. Include the applesAndOranges.sls into top.sls
 
 First, create a directory, alongside top.sls. In this example, for simplification purposes, it is called "directory".
 
@@ -371,7 +371,7 @@ First, let's go through some definitions:
 - Jinja - Syntax for writing targeted code - usually used with grains - and most popularly used with if/else statements. 
 Example: If X os, install package A, else-if Y os install Package B, else install Package C.
 
-Linux distros, for example, comes in different flavor such as Debian, RHEL (Red Hat Linux), etc... where packages and commands are likely to be different. Then of course, you have your Windows vs your Macs, etc. All these systems get packages installed or configurations set in different ways, therefore if you have a wide array of OS types in your fleet of salt minions, utilizing grains and jinja is a must.
+Linux distros, for example, come in different flavors such as Debian, RHEL (Red Hat Linux), etc... where packages and commands are likely to be different. Then of course, you have your Windows vs your Macs, etc. All these systems get packages installed or configurations set in different ways, therefore if you have a wide array of OS types in your fleet of salt minions, utilizing grains and jinja is a must.
 
 For example, take the Freeipa package (Freeipa is an Authentication / Identity Management software)... The Debian Version of that package is called "freeipa-client", while on RHEL, it is called "ipa-client" - so here's where Jinja is useful in that you can use it to install different versions of the same package on different distros.
 
@@ -379,7 +379,7 @@ So if you were to have a sls that installs the package 'freeipa-client', it woul
 
 Another use case would be that different distros could have different configurations for say... ".ssh" or ".bashrc" or different configs for different types of software (like NoMachine, and so on). A Jinja/Grain targeted setup would come into use in these scenarios.
 
-Next, lets proceed with a simple example - the oranges.sls that we had earlier... What if we want our Ubuntu servers to have apples.txt and our Kali (or RHEL or whatever other OS) vms to have oranges.txt, we can easily arrange that with Grains and Jinja.
+Next, let's proceed with a simple example - the oranges.sls that we had earlier... What if we want our Ubuntu servers to have apples.txt and our Kali (or RHEL or whatever other OS) vms to have oranges.txt, we can easily arrange that with Grains and Jinja.
 
 To see what existing grains are available, run "salt '/<minion>' grains.items".
 
@@ -411,7 +411,7 @@ Then I updated the applesAndOranges.sls file so that it looks like this:
 
 - It is important to note that there is a space on BOTH sides between the {%%}. If you get a syntax error, it could potentially because you forgot a space on one side or the other.
 
-If you want to go through the rabbit hole of Jinja syntax, checkout the official Saltstack Jinja Wiki [here](https://docs.saltproject.io/salt/user-guide/en/latest/topics/jinja.html).
+If you want to go through the rabbit hole of Jinja syntax, check out the official Saltstack Jinja Wiki [here](https://docs.saltproject.io/salt/user-guide/en/latest/topics/jinja.html).
 
 You can use grains and jinja targeting in top.sls - for example, where some devices will need some of your .sls's but not others, depending on your setup and minion fleet. 
 
@@ -501,7 +501,7 @@ For the keysize, leave at default and press enter and type 'Y' when prompted for
 
 When asked for a real name, put something like 'saltmaster' for convenience. The name will be used later when we encrypt the key, so it should be something easy to type and easy to remember - preferably with no spaces.
 
-When prompted for an email, you can put something random as it does not seem to affect the decryptability of GPG, then type 'O' when prompted
+When prompted for an email, you can put something random as it does not seem to affect the decryptability of GPG, then type 'O' when prompted.
 
 ![user details](assets/content/automatingSecurelyWithSalt/img/31-3.png)
 
@@ -548,11 +548,11 @@ To do that, run these commands:
 
 chown -R salt:salt /etc/salt/gpgkeys
 
-# This makes it so that the owner (in this case, salt) has FULL access to the /etc/salt/gpgkeys directory while the group(s) and others users have no access.
+# This makes it so that the owner (in this case, salt) has FULL access to the /etc/salt/gpgkeys directory while the group(s) and other users have no access.
 
 chmod 700 /etc/salt/gpgkeys
 
-# This makes it so that the owner (in this case, salt) has ONLY read and write access to the CONTENTS of the /etc/salt/gpgkeys directory while the group(s) and others users have no access.
+# This makes it so that the owner (in this case, salt) has ONLY read and write access to the CONTENTS of the /etc/salt/gpgkeys directory while the group(s) and other users have no access.
 
 chmod 600 /etc/salt/gpgkeys/*
 
@@ -566,7 +566,7 @@ Here's an example of what that looks like:
 
 CRITICAL things to take note of:
 
-- You MUST include a yaml/gpg shebang at the top of the .sls where your hash is stored so that the salt pillar knows to use gpg to decrypt it.
+- You MUST include a yaml/gpg shebang at the top of the .sls where your hash is stored so that the salt pillar knows to use gpg to decrypt it
 - Include a '|' after "password:" but do NOT add any spaces after the '|'
 - You MUST include 4 spaces, not tabs for EVERY line of the password hash starting from "BEGIN PGP" to "END PGP"
 
@@ -592,7 +592,7 @@ add_admin_user:
 
 ```
 
-8. Create the top.sls for /srv/pillar and add the .sls with the credentials to it. You cannot use the pillar if its not in /srv/pillar's top.sls as it won't be able to find it
+8. Create the top.sls for /srv/pillar and add the .sls with the credentials to it. You cannot use the pillar if it's not in /srv/pillar's top.sls as it won't be able to find it.
 
 The syntax is the same as /srv/salt's top.sls, except that it's located in /srv/pillar instead.
 
