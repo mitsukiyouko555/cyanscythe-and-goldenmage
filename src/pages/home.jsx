@@ -97,6 +97,9 @@ export default function Home(){
                 <a href="https://mitsukiyouko555.github.io/hackwebcomic/">
                     <img className="smlogo" src="assets/socialmedialogos/hack.png"/> 
                 </a>
+                <a href="https://mitsukiyouko555.github.io/shards-app/">
+                    <img className="smlogo" src="assets/socialmedialogos/shards-app.png"/> 
+                </a>
             </div>
             <br/>
             <hr/>
@@ -111,3 +114,4 @@ export default function Home(){
     //Portfolio https://mitsukiyouko555.wixsite.com/portfolio
     //Github https://github.com/mitsukiyouko555
     //H@<K Webcomic: https://mitsukiyouko555.github.io/hackwebcomic/
+    //Shards App: https://mitsukiyouko555.github.io/shards-app/
